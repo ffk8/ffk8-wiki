@@ -1,0 +1,1839 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<title>Miami-Dade Public Library System</title>
+		<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" Content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<script language="javascript" src="https://catalog.mdpls.org/scripts/powerpac.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://catalog.mdpls.org/custom/themes/miami/styles.css"><link rel="shortcut icon" type="image/ico" href="https://catalog.mdpls.org/favicon.ico" /><link rel="search" type="application/opensearchdescription+xml" title="Miami-Dade Public Library System" href="http://catalog.mdpls.org/ERMSDaemon/REST/POLARIS/PAC/KW/OpenSearchDescription.xml" />
+
+<script language="javascript">
+
+function print_list()
+{
+    
+		document.execCommand('Print', 1, 'MyTitleList.htm');
+	
+}
+
+function save_list()
+{
+    
+	    document.execCommand('SaveAs', 1 , 'MyTitleList.htm');
+	
+}
+
+function delete_list()
+{
+    var msg = "Do you want to remove all titles from your Temporary List?";
+    
+    
+    if (document.frmTitleList.dropdownListNames.value != "__WORKINGLIST__")
+        msg = "Do you want to delete this list from your account?";
+    
+
+    if (confirm(msg))
+        __doPostBack('linkDeleteList','');
+
+    return false;
+}
+
+function ProcessInput(e)
+{
+    if (window.event) // IE
+        keyNum = e.keyCode;
+    else if (e.which) // Netscape/Firefox/Opera
+        keyNum = e.which;
+
+	if (keyNum == 13)
+	{
+	    e.returnValue = false;
+	    e.cancelBubble = true;
+	    email_list();
+	    return false;
+	}
+	
+	return true;
+}
+
+function email_list()
+{
+	if (document.frmTitleList.textboxEmailAddress.value == "")
+		alert("You must enter an email address.");
+	else if (document.frmTitleList.textboxEmailAddress.value.indexOf("@") == -1)
+		alert("You must enter a valid email address. The specified email address was missing the @ character.");
+	else
+	    __doPostBack('linkSendEmail', document.frmTitleList.textboxEmailAddress.value);
+
+	return false;
+}
+
+function getElement(id)
+{
+    var element;
+    
+	if (document.getElementById)
+        element = document.getElementById(id);
+	else if (document.all)
+		element = document.all[id];
+	else if (document.layers)
+		element = document.layers[id];
+
+    return element;
+}
+
+function move_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=move&from=Reconstruction (Juvenile)&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkMoveToList', pos + "|Reconstruction (Juvenile)|" + e.value);
+}
+
+function copy_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=copy&from=Reconstruction (Juvenile)&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkCopyToList', pos + "|Reconstruction (Juvenile)|" + e.value);
+}
+
+function toggle(e) 
+{
+	doToggle(e, 'https://catalog.mdpls.org/custom/themes/miami/plus.bmp', 
+	         'https://catalog.mdpls.org/custom/themes/miami/minus.bmp', 
+	         'Click to show list of items',
+	         'Click to hide details'); 
+}
+
+//document.onclick = toggle(event);									
+		
+</script>
+
+	</HEAD>
+
+	<body onscroll="ResetTimer();" onload="" onclick="javascript:toggle(event); ResetTimer();">
+	<form name="frmTitleList" method="post" action="titlelist.aspx" id="frmTitleList">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU4NzA2NzQ0Mw8WBh4LQ3VycmVudFZpZXcLKW9Qb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0N1cnJlbnRWaWV3cywgQXBwX1dlYl8za2N6ZTJ1MywgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAHg9Ib2xkaW5nc0Rpc3BsYXkLKXNQb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0hvbGRpbmdzRGlzcGxheXMsIEFwcF9XZWJfM2tjemUydTMsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4TUHJpbnRlckZyaWVuZGx5Vmlld2cWDGYPFQMgTWlhbWktRGFkZSBQdWJsaWMgTGlicmFyeSBTeXN0ZW0aaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy+FAzxsaW5rIHR5cGU9InRleHQvY3NzIiByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9zdHlsZXMuY3NzIj48bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL2ljbyIgaHJlZj0iaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9mYXZpY29uLmljbyIgLz48bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgdGl0bGU9Ik1pYW1pLURhZGUgUHVibGljIExpYnJhcnkgU3lzdGVtIiBocmVmPSJodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvRVJNU0RhZW1vbi9SRVNUL1BPTEFSSVMvUEFDL0tXL09wZW5TZWFyY2hEZXNjcmlwdGlvbi54bWwiIC8+ZAIBDxUBRVRvIHNhdmUgdGhpcyBwYWdlIHRvIGRpc2ssIHNlbGVjdCB0aGUgc2F2ZSBvcHRpb24gZnJvbSB0aGUgRmlsZSBtZW51LmQCAg8VATpEbyB5b3Ugd2FudCB0byByZW1vdmUgYWxsIHRpdGxlcyBmcm9tIHlvdXIgVGVtcG9yYXJ5IExpc3Q/ZAIDD2QWAmYPFQEyRG8geW91IHdhbnQgdG8gZGVsZXRlIHRoaXMgbGlzdCBmcm9tIHlvdXIgYWNjb3VudD9kAgQPFQ0gaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8ZUmVjb25zdHJ1Y3Rpb24gKEp1dmVuaWxlKRBjdHg9MS4xMDMzLjAuMC42GVJlY29uc3RydWN0aW9uIChKdXZlbmlsZSkgaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8ZUmVjb25zdHJ1Y3Rpb24gKEp1dmVuaWxlKRBjdHg9MS4xMDMzLjAuMC42GVJlY29uc3RydWN0aW9uIChKdXZlbmlsZSk2aHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9jdXN0b20vdGhlbWVzL21pYW1pL3BsdXMuYm1wN2h0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9taW51cy5ibXAbQ2xpY2sgdG8gc2hvdyBsaXN0IG9mIGl0ZW1zFUNsaWNrIHRvIGhpZGUgZGV0YWlscwBkAgUPZBYGAgEPDxYCHgdWaXNpYmxlaGQWCGYPZBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZAIDD2QWAmYPZBYGZg9kFgJmDw8WAh8DaGQWBmYPFgIfA2gWAmYPFQI+aHR0cDovL2NhdGFsb2cubWRwbHMub3JnL2RlZmF1bHQuYXNweD9jdHg9X19vcmdpZF9fLjEwMzMuMC4wLjZ3SmF2YVNjcmlwdCBoYXMgYmVlbiBkaXNhYmxlZCBpbiB5b3VyIGJyb3dzZXIuIFBsZWFzZSBlbmFibGUgSmF2YVNjcmlwdCBpbiBvcmRlciB0byBlbmpveSBhbGwgdGhlIGZlYXR1cmVzIG9mIHRoaXMgc2l0ZS5kAgIPFgIfA2gWAmYPFQEAZAIDDxYCHwNoFgJmDxUBAGQCAQ9kFggCAQ8WAh8DaBYUZg8VARlSZWNvbnN0cnVjdGlvbiAoSnV2ZW5pbGUpZAIBDw9kFgIeB29uY2xpY2sFFHJldHVybiBkZWxldGVfbGlzdCgpFgJmDxUBC0RlbGV0ZSBMaXN0ZAICD2QWAgIBD2QWAmYPFQEQUHJpbnRlciBGcmllbmRseWQCAw9kFgICAQ9kFgJmDxUBCkVtYWlsIExpc3RkAgUPZBYEZg8VAQlTaG93IExpc3RkAgEPEA8WAh4LXyFEYXRhQm91bmRnZBAVDw5UZW1wb3JhcnkgTGlzdBRDcmVhdGl2aXR5IC0gUHJpbWFyeRVDdXN0b21zICYgVHJhZHMgLSBKdXYRRW5lcmd5IChKdXZlbmlsZSkVRm9yY2VzICYgRW5lcmd5IC0gSnV2D0hvbWVzIC0gUHJpbWFyeRhJbnZlc3RpZ2F0aW9uIC0gSnV2ZW5pbGUOSm9icyAtIFByaW1hcnkOTWFjaGluZXMgLSBKdXYWTXVzaWMsIERhbmNlICYgQXJ0IChKKRlSZWNvbnN0cnVjdGlvbiAoSnV2ZW5pbGUpE1JlY3ljbGluZyAtIFByaW1hcnkUU2VsZi1Bd2FyZW5lc3MgLSBKdXYYVHJhbnNwb3J0YXRpb24gLSBQcmltYXJ5F1dhbnRzICYgTmVlZHMgLSBQcmltYXJ5FQ8PX19XT1JLSU5HTElTVF9fFENyZWF0aXZpdHkgLSBQcmltYXJ5FUN1c3RvbXMgJiBUcmFkcyAtIEp1dhFFbmVyZ3kgKEp1dmVuaWxlKRVGb3JjZXMgJiBFbmVyZ3kgLSBKdXYPSG9tZXMgLSBQcmltYXJ5GEludmVzdGlnYXRpb24gLSBKdXZlbmlsZQ5Kb2JzIC0gUHJpbWFyeQ5NYWNoaW5lcyAtIEp1dhZNdXNpYywgRGFuY2UgJiBBcnQgKEopGVJlY29uc3RydWN0aW9uIChKdXZlbmlsZSkTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkUKwMPZ2dnZ2dnZ2dnZ2dnZ2dnFgECCmQCBg8VAQdGb3JtYXQ6ZAIHDxAPFgIfBWdkDxYEZgIBAgICAxYEEAUTQnJpZWYgQmlibGlvZ3JhcGhpYwUBMGcQBRJGdWxsIEJpYmxpb2dyYXBoaWMFATFnEAUXQ2hpY2FnbyBNYW51YWwgb2YgU3R5bGUFATJnEAUcQW1lcmljYW4gUHN5Y2guIEFzc29jLiAoQVBBKQUBM2cWAWZkAgkPFgIfA2gWBGYPFQEUSW5jbHVkZSBBdmFpbGFiaWxpdHlkAgEPEA8WAh8FZ2QPFgNmAgECAhYDEAUETm9uZQUBMGcQBRJMb2NhbCBBdmFpbGFiaWxpdHkFATFnEAUTU3lzdGVtIEF2YWlsYWJpbGl0eQUBMmcWAWZkAgsPZBYCZg8VAyFodHRwczovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8QY3R4PTEuMTAzMy4wLjAuNhtDcmVhdGUgbmV3IHNhdmVkIHRpdGxlIGxpc3RkAgwPFgIfA2gWAmYPFQUaaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy88aHR0cHMlM2ElMmYlMmZjYXRhbG9nLm1kcGxzLm9yZyUyZlNlYXJjaCUyZiUyZnRpdGxlbGlzdC5hc3B4EGN0eD0xLjEwMzMuMC4wLjYGTG9nIGluHGFuZCBtb3ZlIHRvIGEgcGVybWFuZW50IGxpc3RkAgIPFgIfA2cWCAIBD2QWAmYPFQEFUHJpbnRkAgIPZBYCZg8VAQxTYXZlIHRvIERpc2tkAgMPZBYCAgEPD2QWAh8EBRNyZXR1cm4gZW1haWxfbGlzdCgpFgJmDxUBDUVtYWlsIExpc3QgdG9kAgQPFQMaaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy8SQmFjayB0byBUaXRsZSBMaXN0GVJlY29uc3RydWN0aW9uIChKdXZlbmlsZSlkAgMPDxYCHwNoZBYCZg8VAQBkAgQPFgIfA2gWAmYPFQFNUGxlYXNlIGNoZWNrIHRoZSBmb3JtYXR0aW5nIHJlcXVpcmVtZW50cyBvZiB5b3VyIHNjaG9vbCwgY29sbGVnZSwgb3Igam91cm5hbC5kAgIPZBYCZg8PFgIfA2hkFghmDxYCHwNoFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAIBDxYCHwNoZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgUPDxYCHwNoZBYIZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZGRm1seIv2C61CI4jLoQSHFvASnhSZYGReepAe3JNczj2w==" />
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['frmTitleList'];
+if (!theForm) {
+    theForm = document.frmTitleList;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+		
+	
+	
+	<table cellspacing="0" cellpadding="0" border="0" style="border-width:0px;width:100%;border-collapse:collapse;">
+	<tr>
+		<td class="LeftPanel" valign="top" style="width:1%;"></td><td align="left" valign="top" style="width:100%;">
+		    <a name="maincontent"></a>
+		    
+			    <br />
+			    <table width=100%><tr>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a href="javascript:void(print_list())">Print</a>&nbsp;
+			            </td>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+				            &nbsp;<a href="javascript:void(save_list())">Save to Disk</a>&nbsp;
+				        </td> 
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a onclick="return email_list();" id="linkSendEmail" href="javascript:__doPostBack(&#39;linkSendEmail&#39;,&#39;&#39;)">Email List to:</a>&nbsp;
+			            </td>
+			            <td nowrap width=1%>
+			                &nbsp;<input type="text" size="25" id="textboxEmailAddress" onkeypress="return ProcessInput(event)" />&nbsp;
+			            </td>
+	                
+	                <td width=1% nowrap>&nbsp;&nbsp;&nbsp;</td>         
+			        <td nowrap width="1%" class="CustomButton">
+			            &nbsp;<a href="https://catalog.mdpls.org/search/titlelist.aspx">Back to Title List</a>&nbsp;
+			        </td>
+			        <td width=100%>&nbsp;</td>
+			            
+				</tr></table>
+				<br />		
+		        <div class=TitleListHeading>Reconstruction (Juvenile)</div>
+		        
+		        <script language="javascript">
+		        	document.getElementById('textboxEmailAddress').focus();
+                </script>
+
+			<div id="panelBibliography">
+			
+	
+	<table border=0 cellpadding=6 cellspacing=6 width="100%">
+	
+		
+
+		
+				<tr>
+					<td>
+						<table border="0" width="100%">
+    		                <tr>
+	    		                <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" width="100%" alt="" height="1"></td>
+	    	                </tr>
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos1" />
+						<img title="&quot;Bury me not in a land of slaves&quot; : African-Americans in the time of Reconstruction" src="https://secure.syndetics.com/hw7.pl?isbn=0531115399/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="&quot;Bury me not in a land of slaves&quot; : African-Americans in the time of Reconstruction" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2000</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=459993&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>"Bury me not in a land of slaves" : African-Americans in the time of Reconstruction</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.0496 HANS J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Hansen, Joyce.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Franklin Watts, c2000., 2000</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">160 p. : ill., map ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0531115399 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos2" />
+						<img title="The geography of hope : Black exodus from the South after Reconstruction" src="https://secure.syndetics.com/hw7.pl?isbn=0761303235/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=40180214" alt="The geography of hope : Black exodus from the South after Reconstruction" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1999</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=452652&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>The geography of hope : Black exodus from the South after Reconstruction</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973 HASK J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Haskins, James, 1941-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Brookfield, Conn. : Twenty-First Century Books, c1999., 1999</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">137 p. : ill., maps ; 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0761303235 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos3" />
+						<img title="Be ever hopeful, Hannalee" src="https://secure.syndetics.com/hw7.pl?isbn=0688075029/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=18163278" alt="Be ever hopeful, Hannalee" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1988</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=309545&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Be ever hopeful, Hannalee</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">BEAT J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Beatty, Patricia, 1922-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Morrow Junior Books, c1988., 1988</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">216 p. ; 22 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0688075029 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos4" />
+						<img title="Cause : Reconstruction America, 1863-1877" src="https://secure.syndetics.com/hw7.pl?isbn=0375827951/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Cause : Reconstruction America, 1863-1877" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2005</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=763244&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Cause : Reconstruction America, 1863-1877</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.71 BOLD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Bolden, Tonya.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Knopf, c2005., 2005</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">138 p. : ill., map ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0375827951 (trade)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos5" />
+						<img title="Into the land of freedom : African Americans in Reconstruction" src="https://secure.syndetics.com/hw7.pl?isbn=0822546906/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Into the land of freedom : African Americans in Reconstruction" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2004</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=689392&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Into the land of freedom : African Americans in Reconstruction</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.0496 GREE J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Greene, Meg.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Minneapolis : Lerner, c2004., 2004</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">112 p. : ill., col. map, music ; 23 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0822546906 (lib. bdg. : alk. paper)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos6" />
+						<img title="Black voices from Reconstruction, 1865-1877" src="https://secure.syndetics.com/hw7.pl?isbn=0813015766/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=37509867" alt="Black voices from Reconstruction, 1865-1877" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1997</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=415548&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Black voices from Reconstruction, 1865-1877</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.82 SMIT Fla</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Smith, John David, 1949-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Gainesville : University Press of Florida, c1997., 1997</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">174 p. : ill. ; 23 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0813015766 (pbk.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos7" />
+						<img title="Reconstruction : America after the Civil War" src="https://secure.syndetics.com/hw7.pl?isbn=052567490X/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=29600619" alt="Reconstruction : America after the Civil War" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1994</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=354330&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Reconstruction : America after the Civil War</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.8 METT J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Mettger, Zak.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Lodestar Books, c1994., 1994</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">122 p. : ill. ; 27 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">052567490X</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos8" />
+						<img title="From slave to Civil War hero : the life and times of Robert Smalls" src="https://secure.syndetics.com/hw7.pl?isbn=0525674896/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=29566450" alt="From slave to Civil War hero : the life and times of Robert Smalls" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1994</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=359547&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>From slave to Civil War hero : the life and times of Robert Smalls</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">B SMALLS J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Cooper, Michael L., 1950-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Lodestar Books, c1994., 1994</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">73 p. : ill., map ; 22 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0525674896</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos9" />
+						<img title="One nation again : a sourcebook on the Civil War" src="https://secure.syndetics.com/hw7.pl?isbn=1562942662/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=25914297" alt="One nation again : a sourcebook on the Civil War" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1993</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=302468&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>One nation again : a sourcebook on the Civil War</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.8 ONE J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Brookfield, Conn. : Millbrook Press, c1993., 1993</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">96 p. : ill. (some col.), col. map ; 27 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1562942662 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos10" />
+						<img title="The Reconstruction era" src="https://secure.syndetics.com/hw7.pl?isbn=9780761421818/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=68192260" alt="The Reconstruction era" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2007</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=807925&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>The Reconstruction era</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.8 STRO J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Stroud, Bettye, 1938-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Marshall Cavendish Benchmark, c2007., 2007</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">ix, 70 p. : ill. (chiefly col.) ; 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780761421818</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos11" />
+						<img title="Black voices from Reconstruction, 1865-1877" src="https://secure.syndetics.com/hw7.pl?isbn=1562945831/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=33665406" alt="Black voices from Reconstruction, 1865-1877" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1996</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=390910&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Black voices from Reconstruction, 1865-1877</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.8 SMIT J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Smith, John David, 1949-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Brookfield, CT : Millbrook Press, c1996., 1996</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">174 p. : ill. ; 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1562945831 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos12" />
+						<img title="Reconstruction and national growth, 1865-1900" src="https://secure.syndetics.com/hw7.pl?isbn=0531027155/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=799741" alt="Reconstruction and national growth, 1865-1900" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1974</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=51415&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Reconstruction and national growth, 1865-1900</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">301.45 K19r J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Katz, William Loren.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York, Watts, 1974., 1974</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">87 p.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0531027155</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos13" />
+						<img title="An album of Reconstruction." src="https://secure.syndetics.com/hw7.pl?isbn=0531027015/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=793518" alt="An album of Reconstruction." align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1974</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=49115&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>An album of Reconstruction.</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.9 K19a J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Katz, William Loren.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York, Watts, 1974., 1974</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">86 p. illus. 28 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0531027015</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos14" />
+						<img title="Dry victories." src="https://secure.syndetics.com/hw7.pl?isbn=0030860237/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=549487" alt="Dry victories." align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1972</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=634&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Dry victories.</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">301.451 J82d J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Jordan, June, 1936-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[1st ed.]</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York, Holt, Rinehart and Winston [c1972], 1972</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">ix, 80 p. illus. 27 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0030860237</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos15" />
+						<img title="Reconstruction" src="https://secure.syndetics.com/hw7.pl?isbn=0761421688/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Reconstruction" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2007</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=800827&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Reconstruction</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.82 RUGG J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Ruggiero, Adriane.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Marshall Cavendish Benchmark, c2007., 2007</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">xxi, 103 p. : ill. (some col.) ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0761421688</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos16" />
+						<img title="The carpetbaggers" src="https://secure.syndetics.com/hw7.pl?isbn=9780756508340/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="The carpetbaggers" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2005</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=803442&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>The carpetbaggers</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">975.041 RAAT J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Raatma, Lucia.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Minneapolis, Minn. : Compass Point Books, c2005., 2005</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">48 p. : ill. (some col.), col. map ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780756508340 (hc.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos17" />
+						<img title="Reconstruction Era reference library" src="https://secure.syndetics.com/hw7.pl?isbn=9780787692162/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Reconstruction Era reference library" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2005</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=804857&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Reconstruction Era reference library</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">973.81 RECO J R</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Detroit : U·X·L : Thomson/Gale, c2005., 2005</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">4 v. : ill., map ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780787692162 (set)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+						</table>
+					</td>
+				</tr>
+			
+
+	</table>
+	
+	
+		</div></td><td class="RightPanel" valign="top" style="width:1%;"></td>
+	</tr>
+</table>
+	
+
+	</form>
+	</body>
+
+</HTML>

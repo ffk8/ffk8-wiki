@@ -1,0 +1,2169 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<title>Miami-Dade Public Library System</title>
+		<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" Content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<script language="javascript" src="https://catalog.mdpls.org/scripts/powerpac.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://catalog.mdpls.org/custom/themes/miami/styles.css"><link rel="shortcut icon" type="image/ico" href="https://catalog.mdpls.org/favicon.ico" /><link rel="search" type="application/opensearchdescription+xml" title="Miami-Dade Public Library System" href="http://catalog.mdpls.org/ERMSDaemon/REST/POLARIS/PAC/KW/OpenSearchDescription.xml" />
+
+<script language="javascript">
+
+function print_list()
+{
+    
+		document.execCommand('Print', 1, 'MyTitleList.htm');
+	
+}
+
+function save_list()
+{
+    
+	    document.execCommand('SaveAs', 1 , 'MyTitleList.htm');
+	
+}
+
+function delete_list()
+{
+    var msg = "Do you want to remove all titles from your Temporary List?";
+    
+    
+    if (document.frmTitleList.dropdownListNames.value != "__WORKINGLIST__")
+        msg = "Do you want to delete this list from your account?";
+    
+
+    if (confirm(msg))
+        __doPostBack('linkDeleteList','');
+
+    return false;
+}
+
+function ProcessInput(e)
+{
+    if (window.event) // IE
+        keyNum = e.keyCode;
+    else if (e.which) // Netscape/Firefox/Opera
+        keyNum = e.which;
+
+	if (keyNum == 13)
+	{
+	    e.returnValue = false;
+	    e.cancelBubble = true;
+	    email_list();
+	    return false;
+	}
+	
+	return true;
+}
+
+function email_list()
+{
+	if (document.frmTitleList.textboxEmailAddress.value == "")
+		alert("You must enter an email address.");
+	else if (document.frmTitleList.textboxEmailAddress.value.indexOf("@") == -1)
+		alert("You must enter a valid email address. The specified email address was missing the @ character.");
+	else
+	    __doPostBack('linkSendEmail', document.frmTitleList.textboxEmailAddress.value);
+
+	return false;
+}
+
+function getElement(id)
+{
+    var element;
+    
+	if (document.getElementById)
+        element = document.getElementById(id);
+	else if (document.all)
+		element = document.all[id];
+	else if (document.layers)
+		element = document.layers[id];
+
+    return element;
+}
+
+function move_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=move&from=Recycling - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkMoveToList', pos + "|Recycling - Primary|" + e.value);
+}
+
+function copy_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=copy&from=Recycling - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkCopyToList', pos + "|Recycling - Primary|" + e.value);
+}
+
+function toggle(e) 
+{
+	doToggle(e, 'https://catalog.mdpls.org/custom/themes/miami/plus.bmp', 
+	         'https://catalog.mdpls.org/custom/themes/miami/minus.bmp', 
+	         'Click to show list of items',
+	         'Click to hide details'); 
+}
+
+//document.onclick = toggle(event);									
+		
+</script>
+
+	</HEAD>
+
+	<body onscroll="ResetTimer();" onload="" onclick="javascript:toggle(event); ResetTimer();">
+	<form name="frmTitleList" method="post" action="titlelist.aspx" id="frmTitleList">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU4NzA2NzQ0Mw8WBh4LQ3VycmVudFZpZXcLKW9Qb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0N1cnJlbnRWaWV3cywgQXBwX1dlYl8za2N6ZTJ1MywgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAHg9Ib2xkaW5nc0Rpc3BsYXkLKXNQb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0hvbGRpbmdzRGlzcGxheXMsIEFwcF9XZWJfM2tjemUydTMsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4TUHJpbnRlckZyaWVuZGx5Vmlld2cWDGYPFQMgTWlhbWktRGFkZSBQdWJsaWMgTGlicmFyeSBTeXN0ZW0aaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy+FAzxsaW5rIHR5cGU9InRleHQvY3NzIiByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9zdHlsZXMuY3NzIj48bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL2ljbyIgaHJlZj0iaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9mYXZpY29uLmljbyIgLz48bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgdGl0bGU9Ik1pYW1pLURhZGUgUHVibGljIExpYnJhcnkgU3lzdGVtIiBocmVmPSJodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvRVJNU0RhZW1vbi9SRVNUL1BPTEFSSVMvUEFDL0tXL09wZW5TZWFyY2hEZXNjcmlwdGlvbi54bWwiIC8+ZAIBDxUBRVRvIHNhdmUgdGhpcyBwYWdlIHRvIGRpc2ssIHNlbGVjdCB0aGUgc2F2ZSBvcHRpb24gZnJvbSB0aGUgRmlsZSBtZW51LmQCAg8VATpEbyB5b3Ugd2FudCB0byByZW1vdmUgYWxsIHRpdGxlcyBmcm9tIHlvdXIgVGVtcG9yYXJ5IExpc3Q/ZAIDD2QWAmYPFQEyRG8geW91IHdhbnQgdG8gZGVsZXRlIHRoaXMgbGlzdCBmcm9tIHlvdXIgYWNjb3VudD9kAgQPFQ0gaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8TUmVjeWNsaW5nIC0gUHJpbWFyeRBjdHg9MS4xMDMzLjAuMC42E1JlY3ljbGluZyAtIFByaW1hcnkgaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8TUmVjeWNsaW5nIC0gUHJpbWFyeRBjdHg9MS4xMDMzLjAuMC42E1JlY3ljbGluZyAtIFByaW1hcnk2aHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9jdXN0b20vdGhlbWVzL21pYW1pL3BsdXMuYm1wN2h0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9taW51cy5ibXAbQ2xpY2sgdG8gc2hvdyBsaXN0IG9mIGl0ZW1zFUNsaWNrIHRvIGhpZGUgZGV0YWlscwBkAgUPZBYGAgEPDxYCHgdWaXNpYmxlaGQWCGYPZBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZAIDD2QWAmYPZBYGZg9kFgJmDw8WAh8DaGQWBmYPFgIfA2gWAmYPFQI+aHR0cDovL2NhdGFsb2cubWRwbHMub3JnL2RlZmF1bHQuYXNweD9jdHg9X19vcmdpZF9fLjEwMzMuMC4wLjZ3SmF2YVNjcmlwdCBoYXMgYmVlbiBkaXNhYmxlZCBpbiB5b3VyIGJyb3dzZXIuIFBsZWFzZSBlbmFibGUgSmF2YVNjcmlwdCBpbiBvcmRlciB0byBlbmpveSBhbGwgdGhlIGZlYXR1cmVzIG9mIHRoaXMgc2l0ZS5kAgIPFgIfA2gWAmYPFQEAZAIDDxYCHwNoFgJmDxUBAGQCAQ9kFggCAQ8WAh8DaBYUZg8VARNSZWN5Y2xpbmcgLSBQcmltYXJ5ZAIBDw9kFgIeB29uY2xpY2sFFHJldHVybiBkZWxldGVfbGlzdCgpFgJmDxUBC0RlbGV0ZSBMaXN0ZAICD2QWAgIBD2QWAmYPFQEQUHJpbnRlciBGcmllbmRseWQCAw9kFgICAQ9kFgJmDxUBCkVtYWlsIExpc3RkAgUPZBYEZg8VAQlTaG93IExpc3RkAgEPEA8WAh4LXyFEYXRhQm91bmRnZBAVCQ5UZW1wb3JhcnkgTGlzdBRDcmVhdGl2aXR5IC0gUHJpbWFyeRVDdXN0b21zICYgVHJhZHMgLSBKdXYVRm9yY2VzICYgRW5lcmd5IC0gSnV2Dk1hY2hpbmVzIC0gSnV2E1JlY3ljbGluZyAtIFByaW1hcnkUU2VsZi1Bd2FyZW5lc3MgLSBKdXYYVHJhbnNwb3J0YXRpb24gLSBQcmltYXJ5F1dhbnRzICYgTmVlZHMgLSBQcmltYXJ5FQkPX19XT1JLSU5HTElTVF9fFENyZWF0aXZpdHkgLSBQcmltYXJ5FUN1c3RvbXMgJiBUcmFkcyAtIEp1dhVGb3JjZXMgJiBFbmVyZ3kgLSBKdXYOTWFjaGluZXMgLSBKdXYTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkUKwMJZ2dnZ2dnZ2dnFgECBWQCBg8VAQdGb3JtYXQ6ZAIHDxAPFgIfBWdkDxYEZgIBAgICAxYEEAUTQnJpZWYgQmlibGlvZ3JhcGhpYwUBMGcQBRJGdWxsIEJpYmxpb2dyYXBoaWMFATFnEAUXQ2hpY2FnbyBNYW51YWwgb2YgU3R5bGUFATJnEAUcQW1lcmljYW4gUHN5Y2guIEFzc29jLiAoQVBBKQUBM2cWAWZkAgkPFgIfA2gWBGYPFQEUSW5jbHVkZSBBdmFpbGFiaWxpdHlkAgEPEA8WAh8FZ2QPFgNmAgECAhYDEAUETm9uZQUBMGcQBRJMb2NhbCBBdmFpbGFiaWxpdHkFATFnEAUTU3lzdGVtIEF2YWlsYWJpbGl0eQUBMmcWAWZkAgsPZBYCZg8VAyFodHRwczovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8QY3R4PTEuMTAzMy4wLjAuNhtDcmVhdGUgbmV3IHNhdmVkIHRpdGxlIGxpc3RkAgwPFgIfA2gWAmYPFQUaaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy88aHR0cHMlM2ElMmYlMmZjYXRhbG9nLm1kcGxzLm9yZyUyZlNlYXJjaCUyZiUyZnRpdGxlbGlzdC5hc3B4EGN0eD0xLjEwMzMuMC4wLjYGTG9nIGluHGFuZCBtb3ZlIHRvIGEgcGVybWFuZW50IGxpc3RkAgIPFgIfA2cWCAIBD2QWAmYPFQEFUHJpbnRkAgIPZBYCZg8VAQxTYXZlIHRvIERpc2tkAgMPZBYCAgEPD2QWAh8EBRNyZXR1cm4gZW1haWxfbGlzdCgpFgJmDxUBDUVtYWlsIExpc3QgdG9kAgQPFQMaaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy8SQmFjayB0byBUaXRsZSBMaXN0E1JlY3ljbGluZyAtIFByaW1hcnlkAgMPDxYCHwNoZBYCZg8VAQBkAgQPFgIfA2gWAmYPFQFNUGxlYXNlIGNoZWNrIHRoZSBmb3JtYXR0aW5nIHJlcXVpcmVtZW50cyBvZiB5b3VyIHNjaG9vbCwgY29sbGVnZSwgb3Igam91cm5hbC5kAgIPZBYCZg8PFgIfA2hkFghmDxYCHwNoFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAIBDxYCHwNoZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgUPDxYCHwNoZBYIZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZGTEhHuzx+3/3olPGR1LT6MZUJot7cELziHwLo0ItTilMw==" />
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['frmTitleList'];
+if (!theForm) {
+    theForm = document.frmTitleList;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+		
+	
+	
+	<table cellspacing="0" cellpadding="0" border="0" style="border-width:0px;width:100%;border-collapse:collapse;">
+	<tr>
+		<td class="LeftPanel" valign="top" style="width:1%;"></td><td align="left" valign="top" style="width:100%;">
+		    <a name="maincontent"></a>
+		    
+			    <br />
+			    <table width=100%><tr>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a href="javascript:void(print_list())">Print</a>&nbsp;
+			            </td>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+				            &nbsp;<a href="javascript:void(save_list())">Save to Disk</a>&nbsp;
+				        </td> 
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a onclick="return email_list();" id="linkSendEmail" href="javascript:__doPostBack(&#39;linkSendEmail&#39;,&#39;&#39;)">Email List to:</a>&nbsp;
+			            </td>
+			            <td nowrap width=1%>
+			                &nbsp;<input type="text" size="25" id="textboxEmailAddress" onkeypress="return ProcessInput(event)" />&nbsp;
+			            </td>
+	                
+	                <td width=1% nowrap>&nbsp;&nbsp;&nbsp;</td>         
+			        <td nowrap width="1%" class="CustomButton">
+			            &nbsp;<a href="https://catalog.mdpls.org/search/titlelist.aspx">Back to Title List</a>&nbsp;
+			        </td>
+			        <td width=100%>&nbsp;</td>
+			            
+				</tr></table>
+				<br />		
+		        <div class=TitleListHeading>Recycling - Primary</div>
+		        
+		        <script language="javascript">
+		        	document.getElementById('textboxEmailAddress').focus();
+                </script>
+
+			<div id="panelBibliography">
+			
+	
+	<table border=0 cellpadding=6 cellspacing=6 width="100%">
+	
+		
+
+		
+				<tr>
+					<td>
+						<table border="0" width="100%">
+    		                <tr>
+	    		                <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" width="100%" alt="" height="1"></td>
+	    	                </tr>
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos1" />
+						<img title="Recycled paper : from start to finish" src="https://secure.syndetics.com/hw7.pl?isbn=1567113958/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Recycled paper : from start to finish" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2000</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=631544&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Recycled paper : from start to finish</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">676.142 WOOD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Woods, Samuel G.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Woodbridge, Conn. : Blackbirch Press, c2000., 2000</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 20 x 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1567113958 (hardcover : alk. paper)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos2" />
+						<img title="Curious George goes green" src="https://secure.syndetics.com/hw7.pl?isbn=/SC.GIF&amp;client=midap&amp;upc=025195047890&amp;oclc=316343016" alt="Curious George goes green" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=897878&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Curious George goes green</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">CURIOUSG DVD</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[Universal City, Calif.] : Universal Studios Home Entertainment, [2009], 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (108 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos3" />
+						<img title="Curious George goes green" src="https://secure.syndetics.com/hw7.pl?isbn=/SC.GIF&amp;client=midap&amp;upc=025195047890&amp;oclc=316343016" alt="Curious George goes green" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=897878&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Curious George goes green</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">CURIOUSG DVD</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[Universal City, Calif.] : Universal Studios Home Entertainment, [2009], 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (108 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos4" />
+						<img title="Earth Day" src="https://secure.syndetics.com/hw7.pl?isbn=9780329702915/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Earth Day" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=896507&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Earth Day</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Reader 1</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">McNamara, Margaret.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1st Aladdin Paperbacks ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Aladdin Paperbacks, 2009., 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 23 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780329702915 (Follett bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos5" />
+						<img title="Margret &amp; H.A. Rey&#39;s Curious George plants a tree" src="https://secure.syndetics.com/hw7.pl?isbn=0547150873/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Margret &amp; H.A. Rey&#39;s Curious George plants a tree" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=890798&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Margret & H.A. Rey's Curious George plants a tree</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">P</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Perez, Monica.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Boston : Houghton Mifflin Harcourt, 2009., 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[26] p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0547150873 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos6" />
+						<img title="School house rock! Earth" src="https://secure.syndetics.com/hw7.pl?isbn=0788890832/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=268875780" alt="School house rock! Earth" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=883045&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>School house rock! Earth</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">333.7 SCHO DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Burbank, CA : Distributed by Walt Disney Studios Home Entertainment, [2009], 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (60 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0788890832</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos7" />
+						<img title="The Magic school bus holiday special" src="https://secure.syndetics.com/hw7.pl?isbn=1568329210/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=50931217" alt="The Magic school bus holiday special" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2002</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=665346&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>The Magic school bus holiday special</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">333.72 MAGI DVD</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Burbank, CA : Distributed by Warner Home Video, c2002., 2002</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (90 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1568329210</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos8" />
+						<img title="The Earth book" src="https://secure.syndetics.com/hw7.pl?isbn=9780316042659/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="The Earth book" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2010</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=926004&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>The Earth book</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">P</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Parr, Todd.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1st ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Little, Brown and Co. Books for Young Readers, 2010., 2010</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[37] p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780316042659 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos9" />
+						<img title="We are extremely very good recyclers" src="https://secure.syndetics.com/hw7.pl?isbn=0803733356/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="We are extremely very good recyclers" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=890855&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>We are extremely very good recyclers</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">C</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Child, Lauren.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Dial Books for Young Readers, c2009., 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[32] p. : col. ill. ; 28 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0803733356 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos10" />
+						<img title="Where does the garbage go?" src="https://secure.syndetics.com/hw7.pl?isbn=0758718365/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Where does the garbage go?" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1994</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=636414&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Where does the garbage go?</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Reader 3</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Showers, Paul.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Rev. ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : HarperCollins Publishers, c1994., 1994</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 21 x 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0758718365 (BWI bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos11" />
+						<img title="All about garbage and recycling ; all about trucks" src="https://secure.syndetics.com/hw7.pl?isbn=9780766235540/SC.GIF&amp;client=midap&amp;upc=018713528179&amp;oclc=212216554" alt="All about garbage and recycling ; all about trucks" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=853944&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>All about garbage and recycling ; all about trucks</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">363.72 ALLA DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : GT Media, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (55 min.) : digital ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780766235540</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos12" />
+						<img title="A brand-new day with Mouse and Mole" src="https://secure.syndetics.com/hw7.pl?isbn=9780618966769/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="A brand-new day with Mouse and Mole" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=872931&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>A brand-new day with Mouse and Mole</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Reader 2</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Yee, Wong Herbert.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Boston : Houghton Mifflin, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[48] p. : col. ill. ; 21 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780618966769 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos13" />
+						<img title="Leave it to PET! 1 : the misadventures of a recycled super robot" src="https://secure.syndetics.com/hw7.pl?isbn=9781421526492/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Leave it to PET! 1 : the misadventures of a recycled super robot" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=911859&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Leave it to PET! 1 : the misadventures of a recycled super robot</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">741.5952 SONI J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Sonishi, Kenji, 1969-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">San Francisco : VIZ Media, [2009], 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">180 p. : chiefly ill. (some col.) ; 19 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781421526492 (pbk.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos14" />
+						<img title="Leave it to PET! : the misadventures of a recycled super robot. 2" src="https://secure.syndetics.com/hw7.pl?isbn=9781421526508/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Leave it to PET! : the misadventures of a recycled super robot. 2" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=911860&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Leave it to PET! : the misadventures of a recycled super robot. 2</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">741.5952 SONI J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Sonishi, Kenji, 1969-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">San Francisco : VIZ Media, [2009], 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">185 p. : chiefly ill. (some col.) ; 20 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781421526508 (pbk.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos15" />
+						<img title="Safety smart goes green!" src="https://secure.syndetics.com/hw7.pl?isbn=1597532193/SC.GIF&amp;client=midap&amp;upc=786936792324&amp;oclc=320364484" alt="Safety smart goes green!" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=917425&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Safety smart goes green!</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">363.7 SAFE DVD</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Elk Grove Village, IL : Disney Educational Productions, 2009., 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (12 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1597532193</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos16" />
+						<img title="Recycle! : a handbook for kids" src="https://secure.syndetics.com/hw7.pl?isbn=0316309710/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=23900817" alt="Recycle! : a handbook for kids" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1992</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=288230&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Recycle! : a handbook for kids</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">628.8 GIBB J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Gibbons, Gail.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Boston : Little, Brown, c1992., 1992</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 v. (unpaged) : col. ill. ; 21 x 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0316309710</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos17" />
+						<img title="Recycle every day!" src="https://secure.syndetics.com/hw7.pl?isbn=0761451498/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=51929226" alt="Recycle every day!" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2003</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=682193&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Recycle every day!</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">W</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Wallace, Nancy Elizabeth.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1st ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Marshall Cavendish, c2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 25 x 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0761451498</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos18" />
+						<img title="Imagine that!" src="https://secure.syndetics.com/hw7.pl?isbn=0738928879/SC.GIF&amp;client=midap&amp;upc=074644977493&amp;oclc=" alt="Imagine that!" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2004</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=707806&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Imagine that!</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">153.3 IMAG DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Standard format.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Sony Wonder, c2004., 2004</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (ca. 30 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0738928879</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos19" />
+						<img title="Wow! wow! Wubbzy! Wubbzy goes green" src="https://secure.syndetics.com/hw7.pl?isbn=/SC.GIF&amp;client=midap&amp;upc=013132137599&amp;oclc=530323742" alt="Wow! wow! Wubbzy! Wubbzy goes green" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2010</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=954840&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Wow! wow! Wubbzy! Wubbzy goes green</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">WOWWOWWU DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Beverly Hills, CA : Distributed by Anchor Bay Entertainment, 2010., 2010</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (58 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos20" />
+						<img title="It&#39;s a big, big world. The Earth needs you recycling and caring for the environment" src="https://secure.syndetics.com/hw7.pl?isbn=1424853036/SC.GIF&amp;client=midap&amp;upc=043396186415&amp;oclc=123120455" alt="It&#39;s a big, big world. The Earth needs you recycling and caring for the environment" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2007</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=868710&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>It's a big, big world. The Earth needs you recycling and caring for the environment</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">ITSABIGB DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Culver City, Calif. : Sony Pictures Home Entertainment, c2007., 2007</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (ca 73 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1424853036</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos21" />
+						<img title="Leave it to PET! : the misadventures of a recycled super robot. 3" src="https://secure.syndetics.com/hw7.pl?isbn=9781421526515/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Leave it to PET! : the misadventures of a recycled super robot. 3" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=950847&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Leave it to PET! : the misadventures of a recycled super robot. 3</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">741.5952 SONI J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Sonishi, Kenji, 1969-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">San Francisco : VIZ Media, [2009], 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">186 p. : chiefly ill. (some col.) ; 19 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781421526515 (pbk.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+						</table>
+					</td>
+				</tr>
+			
+
+	</table>
+	
+	
+		</div></td><td class="RightPanel" valign="top" style="width:1%;"></td>
+	</tr>
+</table>
+	
+
+	</form>
+	</body>
+
+</HTML>

@@ -1,0 +1,591 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<title>Miami-Dade Public Library System</title>
+		<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" Content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<script language="javascript" src="https://catalog.mdpls.org/scripts/powerpac.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://catalog.mdpls.org/custom/themes/miami/styles.css"><link rel="shortcut icon" type="image/ico" href="https://catalog.mdpls.org/favicon.ico" /><link rel="search" type="application/opensearchdescription+xml" title="Miami-Dade Public Library System" href="http://catalog.mdpls.org/ERMSDaemon/REST/POLARIS/PAC/KW/OpenSearchDescription.xml" />
+
+<script language="javascript">
+
+function print_list()
+{
+    
+		document.execCommand('Print', 1, 'MyTitleList.htm');
+	
+}
+
+function save_list()
+{
+    
+	    document.execCommand('SaveAs', 1 , 'MyTitleList.htm');
+	
+}
+
+function delete_list()
+{
+    var msg = "Do you want to remove all titles from your Temporary List?";
+    
+    
+    if (document.frmTitleList.dropdownListNames.value != "__WORKINGLIST__")
+        msg = "Do you want to delete this list from your account?";
+    
+
+    if (confirm(msg))
+        __doPostBack('linkDeleteList','');
+
+    return false;
+}
+
+function ProcessInput(e)
+{
+    if (window.event) // IE
+        keyNum = e.keyCode;
+    else if (e.which) // Netscape/Firefox/Opera
+        keyNum = e.which;
+
+	if (keyNum == 13)
+	{
+	    e.returnValue = false;
+	    e.cancelBubble = true;
+	    email_list();
+	    return false;
+	}
+	
+	return true;
+}
+
+function email_list()
+{
+	if (document.frmTitleList.textboxEmailAddress.value == "")
+		alert("You must enter an email address.");
+	else if (document.frmTitleList.textboxEmailAddress.value.indexOf("@") == -1)
+		alert("You must enter a valid email address. The specified email address was missing the @ character.");
+	else
+	    __doPostBack('linkSendEmail', document.frmTitleList.textboxEmailAddress.value);
+
+	return false;
+}
+
+function getElement(id)
+{
+    var element;
+    
+	if (document.getElementById)
+        element = document.getElementById(id);
+	else if (document.all)
+		element = document.all[id];
+	else if (document.layers)
+		element = document.layers[id];
+
+    return element;
+}
+
+function move_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=move&from=Wants & Needs - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkMoveToList', pos + "|Wants & Needs - Primary|" + e.value);
+}
+
+function copy_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=copy&from=Wants & Needs - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkCopyToList', pos + "|Wants & Needs - Primary|" + e.value);
+}
+
+function toggle(e) 
+{
+	doToggle(e, 'https://catalog.mdpls.org/custom/themes/miami/plus.bmp', 
+	         'https://catalog.mdpls.org/custom/themes/miami/minus.bmp', 
+	         'Click to show list of items',
+	         'Click to hide details'); 
+}
+
+//document.onclick = toggle(event);									
+		
+</script>
+
+	</HEAD>
+
+	<body onscroll="ResetTimer();" onload="" onclick="javascript:toggle(event); ResetTimer();">
+	<form name="frmTitleList" method="post" action="titlelist.aspx" id="frmTitleList">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU4NzA2NzQ0Mw8WBh4LQ3VycmVudFZpZXcLKW9Qb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0N1cnJlbnRWaWV3cywgQXBwX1dlYl8za2N6ZTJ1MywgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAHg9Ib2xkaW5nc0Rpc3BsYXkLKXNQb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0hvbGRpbmdzRGlzcGxheXMsIEFwcF9XZWJfM2tjemUydTMsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4TUHJpbnRlckZyaWVuZGx5Vmlld2cWDGYPFQMgTWlhbWktRGFkZSBQdWJsaWMgTGlicmFyeSBTeXN0ZW0aaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy+FAzxsaW5rIHR5cGU9InRleHQvY3NzIiByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9zdHlsZXMuY3NzIj48bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL2ljbyIgaHJlZj0iaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9mYXZpY29uLmljbyIgLz48bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgdGl0bGU9Ik1pYW1pLURhZGUgUHVibGljIExpYnJhcnkgU3lzdGVtIiBocmVmPSJodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvRVJNU0RhZW1vbi9SRVNUL1BPTEFSSVMvUEFDL0tXL09wZW5TZWFyY2hEZXNjcmlwdGlvbi54bWwiIC8+ZAIBDxUBRVRvIHNhdmUgdGhpcyBwYWdlIHRvIGRpc2ssIHNlbGVjdCB0aGUgc2F2ZSBvcHRpb24gZnJvbSB0aGUgRmlsZSBtZW51LmQCAg8VATpEbyB5b3Ugd2FudCB0byByZW1vdmUgYWxsIHRpdGxlcyBmcm9tIHlvdXIgVGVtcG9yYXJ5IExpc3Q/ZAIDD2QWAmYPFQEyRG8geW91IHdhbnQgdG8gZGVsZXRlIHRoaXMgbGlzdCBmcm9tIHlvdXIgYWNjb3VudD9kAgQPFQ0gaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8XV2FudHMgJiBOZWVkcyAtIFByaW1hcnkQY3R4PTEuMTAzMy4wLjAuNhdXYW50cyAmIE5lZWRzIC0gUHJpbWFyeSBodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvU2VhcmNoLxdXYW50cyAmIE5lZWRzIC0gUHJpbWFyeRBjdHg9MS4xMDMzLjAuMC42F1dhbnRzICYgTmVlZHMgLSBQcmltYXJ5Nmh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9wbHVzLmJtcDdodHRwczovL2NhdGFsb2cubWRwbHMub3JnL2N1c3RvbS90aGVtZXMvbWlhbWkvbWludXMuYm1wG0NsaWNrIHRvIHNob3cgbGlzdCBvZiBpdGVtcxVDbGljayB0byBoaWRlIGRldGFpbHMAZAIFD2QWBgIBDw8WAh4HVmlzaWJsZWhkFghmD2QWAmYPFQI+aHR0cDovL2NhdGFsb2cubWRwbHMub3JnL2RlZmF1bHQuYXNweD9jdHg9X19vcmdpZF9fLjEwMzMuMC4wLjZ3SmF2YVNjcmlwdCBoYXMgYmVlbiBkaXNhYmxlZCBpbiB5b3VyIGJyb3dzZXIuIFBsZWFzZSBlbmFibGUgSmF2YVNjcmlwdCBpbiBvcmRlciB0byBlbmpveSBhbGwgdGhlIGZlYXR1cmVzIG9mIHRoaXMgc2l0ZS5kAgEPFgIfA2hkAgIPFgIfA2gWAmYPFQEAZAIDDxYCHwNoFgJmDxUBAGQCAw9kFgJmD2QWBmYPZBYCZg8PFgIfA2hkFgZmDxYCHwNoFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgEPZBYIAgEPFgIfA2gWFGYPFQEbV2FudHMgJmFtcDsgTmVlZHMgLSBQcmltYXJ5ZAIBDw9kFgIeB29uY2xpY2sFFHJldHVybiBkZWxldGVfbGlzdCgpFgJmDxUBC0RlbGV0ZSBMaXN0ZAICD2QWAgIBD2QWAmYPFQEQUHJpbnRlciBGcmllbmRseWQCAw9kFgICAQ9kFgJmDxUBCkVtYWlsIExpc3RkAgUPZBYEZg8VAQlTaG93IExpc3RkAgEPEA8WAh4LXyFEYXRhQm91bmRnZBAVCQ5UZW1wb3JhcnkgTGlzdBRDcmVhdGl2aXR5IC0gUHJpbWFyeRVDdXN0b21zICYgVHJhZHMgLSBKdXYVRm9yY2VzICYgRW5lcmd5IC0gSnV2Dk1hY2hpbmVzIC0gSnV2E1JlY3ljbGluZyAtIFByaW1hcnkUU2VsZi1Bd2FyZW5lc3MgLSBKdXYYVHJhbnNwb3J0YXRpb24gLSBQcmltYXJ5F1dhbnRzICYgTmVlZHMgLSBQcmltYXJ5FQkPX19XT1JLSU5HTElTVF9fFENyZWF0aXZpdHkgLSBQcmltYXJ5FUN1c3RvbXMgJiBUcmFkcyAtIEp1dhVGb3JjZXMgJiBFbmVyZ3kgLSBKdXYOTWFjaGluZXMgLSBKdXYTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkUKwMJZ2dnZ2dnZ2dnFgECCGQCBg8VAQdGb3JtYXQ6ZAIHDxAPFgIfBWdkDxYEZgIBAgICAxYEEAUTQnJpZWYgQmlibGlvZ3JhcGhpYwUBMGcQBRJGdWxsIEJpYmxpb2dyYXBoaWMFATFnEAUXQ2hpY2FnbyBNYW51YWwgb2YgU3R5bGUFATJnEAUcQW1lcmljYW4gUHN5Y2guIEFzc29jLiAoQVBBKQUBM2cWAWZkAgkPFgIfA2gWBGYPFQEUSW5jbHVkZSBBdmFpbGFiaWxpdHlkAgEPEA8WAh8FZ2QPFgNmAgECAhYDEAUETm9uZQUBMGcQBRJMb2NhbCBBdmFpbGFiaWxpdHkFATFnEAUTU3lzdGVtIEF2YWlsYWJpbGl0eQUBMmcWAWZkAgsPZBYCZg8VAyFodHRwczovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8QY3R4PTEuMTAzMy4wLjAuNhtDcmVhdGUgbmV3IHNhdmVkIHRpdGxlIGxpc3RkAgwPFgIfA2gWAmYPFQUaaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy88aHR0cHMlM2ElMmYlMmZjYXRhbG9nLm1kcGxzLm9yZyUyZlNlYXJjaCUyZiUyZnRpdGxlbGlzdC5hc3B4EGN0eD0xLjEwMzMuMC4wLjYGTG9nIGluHGFuZCBtb3ZlIHRvIGEgcGVybWFuZW50IGxpc3RkAgIPFgIfA2cWCAIBD2QWAmYPFQEFUHJpbnRkAgIPZBYCZg8VAQxTYXZlIHRvIERpc2tkAgMPZBYCAgEPD2QWAh8EBRNyZXR1cm4gZW1haWxfbGlzdCgpFgJmDxUBDUVtYWlsIExpc3QgdG9kAgQPFQMaaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy8SQmFjayB0byBUaXRsZSBMaXN0F1dhbnRzICYgTmVlZHMgLSBQcmltYXJ5ZAIDDw8WAh8DaGQWAmYPFQEAZAIEDxYCHwNoFgJmDxUBTVBsZWFzZSBjaGVjayB0aGUgZm9ybWF0dGluZyByZXF1aXJlbWVudHMgb2YgeW91ciBzY2hvb2wsIGNvbGxlZ2UsIG9yIGpvdXJuYWwuZAICD2QWAmYPDxYCHwNoZBYIZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZAIFDw8WAh8DaGQWCGYPFgIfA2gWAmYPFQI+aHR0cDovL2NhdGFsb2cubWRwbHMub3JnL2RlZmF1bHQuYXNweD9jdHg9X19vcmdpZF9fLjEwMzMuMC4wLjZ3SmF2YVNjcmlwdCBoYXMgYmVlbiBkaXNhYmxlZCBpbiB5b3VyIGJyb3dzZXIuIFBsZWFzZSBlbmFibGUgSmF2YVNjcmlwdCBpbiBvcmRlciB0byBlbmpveSBhbGwgdGhlIGZlYXR1cmVzIG9mIHRoaXMgc2l0ZS5kAgEPFgIfA2hkAgIPFgIfA2gWAmYPFQEAZAIDDxYCHwNoFgJmDxUBAGRkp5dDIMhmyWT8ufelW81dwPM8EVn9rYth5eSnFybCZ98=" />
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['frmTitleList'];
+if (!theForm) {
+    theForm = document.frmTitleList;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+		
+	
+	
+	<table cellspacing="0" cellpadding="0" border="0" style="border-width:0px;width:100%;border-collapse:collapse;">
+	<tr>
+		<td class="LeftPanel" valign="top" style="width:1%;"></td><td align="left" valign="top" style="width:100%;">
+		    <a name="maincontent"></a>
+		    
+			    <br />
+			    <table width=100%><tr>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a href="javascript:void(print_list())">Print</a>&nbsp;
+			            </td>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+				            &nbsp;<a href="javascript:void(save_list())">Save to Disk</a>&nbsp;
+				        </td> 
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a onclick="return email_list();" id="linkSendEmail" href="javascript:__doPostBack(&#39;linkSendEmail&#39;,&#39;&#39;)">Email List to:</a>&nbsp;
+			            </td>
+			            <td nowrap width=1%>
+			                &nbsp;<input type="text" size="25" id="textboxEmailAddress" onkeypress="return ProcessInput(event)" />&nbsp;
+			            </td>
+	                
+	                <td width=1% nowrap>&nbsp;&nbsp;&nbsp;</td>         
+			        <td nowrap width="1%" class="CustomButton">
+			            &nbsp;<a href="https://catalog.mdpls.org/search/titlelist.aspx">Back to Title List</a>&nbsp;
+			        </td>
+			        <td width=100%>&nbsp;</td>
+			            
+				</tr></table>
+				<br />		
+		        <div class=TitleListHeading>Wants & Needs - Primary</div>
+		        
+		        <script language="javascript">
+		        	document.getElementById('textboxEmailAddress').focus();
+                </script>
+
+			<div id="panelBibliography">
+			
+	
+	<table border=0 cellpadding=6 cellspacing=6 width="100%">
+	
+		
+
+		
+				<tr>
+					<td>
+						<table border="0" width="100%">
+    		                <tr>
+	    		                <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" width="100%" alt="" height="1"></td>
+	    	                </tr>
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos1" />
+						<img title="Holly&#39;s red boots" src="https://secure.syndetics.com/hw7.pl?isbn=9780823421589/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Holly&#39;s red boots" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=872984&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Holly's red boots</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">C</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chessa, Francesca.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1st American ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Holiday House, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[26] p. : col. ill. ; 31 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780823421589 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos2" />
+						<img title="Click, clack, moo, cows that type and more fun on the farm" src="https://secure.syndetics.com/hw7.pl?isbn=0439582946/SC.GIF&amp;client=midap&amp;upc=767685955239&amp;oclc=53078277" alt="Click, clack, moo, cows that type and more fun on the farm" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2002</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=662661&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Click, clack, moo, cows that type and more fun on the farm</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">CLICKCLA DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Norwalk, CT : Weston Woods ; [New York, N.Y.] : Scholastic : Distributed by New Video Group, c2002., 2002</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (ca. 52 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0439582946</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos3" />
+						<img title="Charlie and Lola. 11, I really really need actual ice skates and other stories" src="https://secure.syndetics.com/hw7.pl?isbn=1419889540/SC.GIF&amp;client=midap&amp;upc=883929099603&amp;oclc=657399056" alt="Charlie and Lola. 11, I really really need actual ice skates and other stories" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2010</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=1004561&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Charlie and Lola. 11, I really really need actual ice skates and other stories</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">CHARLIEA DVD</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[United States] : British Broadcasting Corporation, 2010., 2010</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (ca. 99 min.) : sd., col. ; 4 3/4 in.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1419889540</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos4" />
+						<img title="Far far away!" src="https://secure.syndetics.com/hw7.pl?isbn=9780399250071/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Far far away!" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2009</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=901931&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Far far away!</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">S</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Segal, John.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Philomel Books, c2009., 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">[32] p. : col. ill. ; 30 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780399250071 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+						</table>
+					</td>
+				</tr>
+			
+
+	</table>
+	
+	
+		</div></td><td class="RightPanel" valign="top" style="width:1%;"></td>
+	</tr>
+</table>
+	
+
+	</form>
+	</body>
+
+</HTML>

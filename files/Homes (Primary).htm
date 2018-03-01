@@ -1,0 +1,696 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Miami-Dade Public Library System</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<script language="javascript" src="Homes%20%28Primary%29_files/powerpac.js"></script>
+		<link type="text/css" rel="stylesheet" href="Homes%20%28Primary%29_files/styles.css"><link rel="shortcut icon" type="image/ico" href="https://catalog.mdpls.org/favicon.ico"><link rel="search" type="application/opensearchdescription+xml" title="Miami-Dade Public Library System" href="http://catalog.mdpls.org/ERMSDaemon/REST/POLARIS/PAC/KW/OpenSearchDescription.xml">
+
+<script language="javascript">
+
+function print_list()
+{
+    
+		print();
+	
+}
+
+function save_list()
+{
+    
+		alert("To save this page to disk, select the save option from the File menu.");
+	
+}
+
+function delete_list()
+{
+    var msg = "Do you want to remove all titles from your Temporary List?";
+    
+    
+    if (document.frmTitleList.dropdownListNames.value != "__WORKINGLIST__")
+        msg = "Do you want to delete this list from your account?";
+    
+
+    if (confirm(msg))
+        __doPostBack('linkDeleteList','');
+
+    return false;
+}
+
+function ProcessInput(e)
+{
+    if (window.event) // IE
+        keyNum = e.keyCode;
+    else if (e.which) // Netscape/Firefox/Opera
+        keyNum = e.which;
+
+	if (keyNum == 13)
+	{
+	    e.returnValue = false;
+	    e.cancelBubble = true;
+	    email_list();
+	    return false;
+	}
+	
+	return true;
+}
+
+function email_list()
+{
+	if (document.frmTitleList.textboxEmailAddress.value == "")
+		alert("You must enter an email address.");
+	else if (document.frmTitleList.textboxEmailAddress.value.indexOf("@") == -1)
+		alert("You must enter a valid email address. The specified email address was missing the @ character.");
+	else
+	    __doPostBack('linkSendEmail', document.frmTitleList.textboxEmailAddress.value);
+
+	return false;
+}
+
+function getElement(id)
+{
+    var element;
+    
+	if (document.getElementById)
+        element = document.getElementById(id);
+	else if (document.all)
+		element = document.all[id];
+	else if (document.layers)
+		element = document.layers[id];
+
+    return element;
+}
+
+function move_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=move&from=Homes - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkMoveToList', pos + "|Homes - Primary|" + e.value);
+}
+
+function copy_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=copy&from=Homes - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkCopyToList', pos + "|Homes - Primary|" + e.value);
+}
+
+function toggle(e) 
+{
+	doToggle(e, 'https://catalog.mdpls.org/custom/themes/miami/plus.bmp', 
+	         'https://catalog.mdpls.org/custom/themes/miami/minus.bmp', 
+	         'Click to show list of items',
+	         'Click to hide details'); 
+}
+
+//document.onclick = toggle(event);									
+		
+</script>
+
+	</head>
+
+	<body onscroll="ResetTimer();" onload="" onclick="javascript:toggle(event); ResetTimer();">
+	<form name="frmTitleList" method="post" action="titlelist.aspx" id="frmTitleList">
+<input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+<input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU4NzA2NzQ0Mw8WBh4LQ3VycmVudFZpZXcLKW9Qb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0N1cnJlbnRWaWV3cywgQXBwX1dlYl8za2N6ZTJ1MywgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAHg9Ib2xkaW5nc0Rpc3BsYXkLKXNQb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0hvbGRpbmdzRGlzcGxheXMsIEFwcF9XZWJfM2tjemUydTMsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4TUHJpbnRlckZyaWVuZGx5Vmlld2cWDGYPFQMgTWlhbWktRGFkZSBQdWJsaWMgTGlicmFyeSBTeXN0ZW0aaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy+FAzxsaW5rIHR5cGU9InRleHQvY3NzIiByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9zdHlsZXMuY3NzIj48bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL2ljbyIgaHJlZj0iaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9mYXZpY29uLmljbyIgLz48bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgdGl0bGU9Ik1pYW1pLURhZGUgUHVibGljIExpYnJhcnkgU3lzdGVtIiBocmVmPSJodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvRVJNU0RhZW1vbi9SRVNUL1BPTEFSSVMvUEFDL0tXL09wZW5TZWFyY2hEZXNjcmlwdGlvbi54bWwiIC8+ZAIBDxUBRVRvIHNhdmUgdGhpcyBwYWdlIHRvIGRpc2ssIHNlbGVjdCB0aGUgc2F2ZSBvcHRpb24gZnJvbSB0aGUgRmlsZSBtZW51LmQCAg8VATpEbyB5b3Ugd2FudCB0byByZW1vdmUgYWxsIHRpdGxlcyBmcm9tIHlvdXIgVGVtcG9yYXJ5IExpc3Q/ZAIDD2QWAmYPFQEyRG8geW91IHdhbnQgdG8gZGVsZXRlIHRoaXMgbGlzdCBmcm9tIHlvdXIgYWNjb3VudD9kAgQPFQ0gaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8PSG9tZXMgLSBQcmltYXJ5EGN0eD0xLjEwMzMuMC4wLjYPSG9tZXMgLSBQcmltYXJ5IGh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9TZWFyY2gvD0hvbWVzIC0gUHJpbWFyeRBjdHg9MS4xMDMzLjAuMC42D0hvbWVzIC0gUHJpbWFyeTZodHRwczovL2NhdGFsb2cubWRwbHMub3JnL2N1c3RvbS90aGVtZXMvbWlhbWkvcGx1cy5ibXA3aHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9jdXN0b20vdGhlbWVzL21pYW1pL21pbnVzLmJtcBtDbGljayB0byBzaG93IGxpc3Qgb2YgaXRlbXMVQ2xpY2sgdG8gaGlkZSBkZXRhaWxzAGQCBQ9kFgYCAQ8PFgIeB1Zpc2libGVoZBYIZg9kFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAIBDxYCHwNoZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgMPZBYCZg9kFgZmD2QWAmYPDxYCHwNoZBYGZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZAIBD2QWCAIBDxYCHwNoFhRmDxUBD0hvbWVzIC0gUHJpbWFyeWQCAQ8PZBYCHgdvbmNsaWNrBRRyZXR1cm4gZGVsZXRlX2xpc3QoKRYCZg8VAQtEZWxldGUgTGlzdGQCAg9kFgICAQ9kFgJmDxUBEFByaW50ZXIgRnJpZW5kbHlkAgMPZBYCAgEPZBYCZg8VAQpFbWFpbCBMaXN0ZAIFD2QWBGYPFQEJU2hvdyBMaXN0ZAIBDxAPFgIeC18hRGF0YUJvdW5kZ2QQFQoOVGVtcG9yYXJ5IExpc3QUQ3JlYXRpdml0eSAtIFByaW1hcnkVQ3VzdG9tcyAmIFRyYWRzIC0gSnV2FUZvcmNlcyAmIEVuZXJneSAtIEp1dg9Ib21lcyAtIFByaW1hcnkOTWFjaGluZXMgLSBKdXYTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkVCg9fX1dPUktJTkdMSVNUX18UQ3JlYXRpdml0eSAtIFByaW1hcnkVQ3VzdG9tcyAmIFRyYWRzIC0gSnV2FUZvcmNlcyAmIEVuZXJneSAtIEp1dg9Ib21lcyAtIFByaW1hcnkOTWFjaGluZXMgLSBKdXYTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkUKwMKZ2dnZ2dnZ2dnZxYBAgRkAgYPFQEHRm9ybWF0OmQCBw8QDxYCHwVnZA8WBGYCAQICAgMWBBAFE0JyaWVmIEJpYmxpb2dyYXBoaWMFATBnEAUSRnVsbCBCaWJsaW9ncmFwaGljBQExZxAFF0NoaWNhZ28gTWFudWFsIG9mIFN0eWxlBQEyZxAFHEFtZXJpY2FuIFBzeWNoLiBBc3NvYy4gKEFQQSkFATNnFgFmZAIJDxYCHwNoFgRmDxUBFEluY2x1ZGUgQXZhaWxhYmlsaXR5ZAIBDxAPFgIfBWdkDxYDZgIBAgIWAxAFBE5vbmUFATBnEAUSTG9jYWwgQXZhaWxhYmlsaXR5BQExZxAFE1N5c3RlbSBBdmFpbGFiaWxpdHkFATJnFgFmZAILD2QWAmYPFQMhaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9TZWFyY2gvEGN0eD0xLjEwMzMuMC4wLjYbQ3JlYXRlIG5ldyBzYXZlZCB0aXRsZSBsaXN0ZAIMDxYCHwNoFgJmDxUFGmh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvPGh0dHBzJTNhJTJmJTJmY2F0YWxvZy5tZHBscy5vcmclMmZTZWFyY2glMmYlMmZ0aXRsZWxpc3QuYXNweBBjdHg9MS4xMDMzLjAuMC42BkxvZyBpbhxhbmQgbW92ZSB0byBhIHBlcm1hbmVudCBsaXN0ZAICDxYCHwNnFggCAQ9kFgJmDxUBBVByaW50ZAICD2QWAmYPFQEMU2F2ZSB0byBEaXNrZAIDD2QWAgIBDw9kFgIfBAUTcmV0dXJuIGVtYWlsX2xpc3QoKRYCZg8VAQ1FbWFpbCBMaXN0IHRvZAIEDxUDGmh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvEkJhY2sgdG8gVGl0bGUgTGlzdA9Ib21lcyAtIFByaW1hcnlkAgMPDxYCHwNoZBYCZg8VAQBkAgQPFgIfA2gWAmYPFQFNUGxlYXNlIGNoZWNrIHRoZSBmb3JtYXR0aW5nIHJlcXVpcmVtZW50cyBvZiB5b3VyIHNjaG9vbCwgY29sbGVnZSwgb3Igam91cm5hbC5kAgIPZBYCZg8PFgIfA2hkFghmDxYCHwNoFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAIBDxYCHwNoZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgUPDxYCHwNoZBYIZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZGQh5uw12zFpTxyNf+gShnSbIcyYjbGu6uZnoJz2e51LsQ==" type="hidden">
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['frmTitleList'];
+if (!theForm) {
+    theForm = document.frmTitleList;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+		
+	
+	
+	<table style="border-width: 0px; width: 100%; border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td class="LeftPanel" style="width: 1%;" valign="top"></td><td style="width: 100%;" valign="top" align="left">
+		    <a name="maincontent"></a>
+		    
+			    <br>
+			    <table width="100%"><tbody><tr>
+			        
+			            <td class="CustomButton" nowrap="nowrap" width="1%">
+			                &nbsp;<a href="javascript:void(print_list())">Print</a>&nbsp;
+			            </td>
+			        
+			            <td class="CustomButton" nowrap="nowrap" width="1%">
+				            &nbsp;<a href="javascript:void(save_list())">Save to Disk</a>&nbsp;
+				        </td> 
+			        
+			            <td class="CustomButton" nowrap="nowrap" width="1%">
+			                &nbsp;<a onclick="return email_list();" id="linkSendEmail" href="javascript:__doPostBack('linkSendEmail','')">Email List to:</a>&nbsp;
+			            </td>
+			            <td nowrap="nowrap" width="1%">
+			                &nbsp;<input size="25" id="textboxEmailAddress" onkeypress="return ProcessInput(event)" type="text">&nbsp;
+			            </td>
+	                
+	                <td nowrap="nowrap" width="1%">&nbsp;&nbsp;&nbsp;</td>         
+			        <td class="CustomButton" nowrap="nowrap" width="1%">
+			            &nbsp;<a href="https://catalog.mdpls.org/search/titlelist.aspx">Back to Title List</a>&nbsp;
+			        </td>
+			        <td width="100%">&nbsp;</td>
+			            
+				</tr></tbody></table>
+				<br>		
+		        <div class="TitleListHeading">Homes - Primary</div>
+		        
+		        <script language="javascript">
+		        	document.getElementById('textboxEmailAddress').focus();
+                </script>
+
+			<div id="panelBibliography">
+			
+	
+	<table border="0" cellpadding="6" cellspacing="6" width="100%">
+	
+		
+
+		
+				<tbody><tr>
+					<td>
+						<table border="0" width="100%">
+    		                <tbody><tr>
+	    		                <td colspan="3" width="100%" align="center"><img src="Homes%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	                </tr>
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos1">
+						<img title="Hogares" src="Homes%20%28Primary%29_files/hw7.jpg" alt="Hogares" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Homes%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2006</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=773374&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Hogares</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">591.564 PARK J Sp</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Parker, Victoria.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Chicago : Heinemann Library, c2006., 2006</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">24 p. : col. ill. ; 23 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9781403485236 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Homes%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos2">
+						<img title="Two homes" src="Homes%20%28Primary%29_files/hw7_005.jpg" alt="Two homes" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Homes%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2001</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=570973&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Two homes</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">M</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Masurel, Claire.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Cambridge, Mass. : Candlewick Press, 2001., 2001</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[32] p. : col. ill. ; 24 x 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0763605115 (alk. paper)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Homes%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos3">
+						<img title="The ABC book of American homes" src="Homes%20%28Primary%29_files/hw7_004.jpg" alt="The ABC book of American homes" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Homes%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2008</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=869613&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">The ABC book of American homes</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">S</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Shoulders, Michael.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Watertown, Mass. : Charlesbridge, c2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[32] p. : col. ill. ; 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9781570915659 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Homes%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos4">
+						<img title="Who dug this hole?" src="Homes%20%28Primary%29_files/hw7_002.jpg" alt="Who dug this hole?" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Homes%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2001</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=563689&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Who dug this hole?</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Reader 2</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Holmes, Anita, 1937-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Benchmark Books, c2001., 2001</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">32 p. : col. ill ; 23 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0761411127</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Homes%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos5">
+						<img title="Harry's home" src="Homes%20%28Primary%29_files/hw7_003.jpg" alt="Harry's home" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Homes%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2000</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=460047&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Harry's home</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">A</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Anholt, Catherine.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[New York] : Farrar Straus Giroux, 2000., 2000</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[32] p. : col. ill. ; 25 x 28 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0374328708</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Homes%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+						</tbody></table>
+					</td>
+				</tr>
+			
+
+	</tbody></table>
+	
+	
+		</div></td><td class="RightPanel" style="width: 1%;" valign="top"></td>
+	</tr>
+</tbody></table>
+	
+
+	</form>
+	
+
+
+</body></html>

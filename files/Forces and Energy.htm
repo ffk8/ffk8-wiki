@@ -1,0 +1,2598 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<title>Miami-Dade Public Library System</title>
+		<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" Content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<script language="javascript" src="https://catalog.mdpls.org/scripts/powerpac.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://catalog.mdpls.org/custom/themes/miami/styles.css"><link rel="shortcut icon" type="image/ico" href="https://catalog.mdpls.org/favicon.ico" /><link rel="search" type="application/opensearchdescription+xml" title="Miami-Dade Public Library System" href="http://catalog.mdpls.org/ERMSDaemon/REST/POLARIS/PAC/KW/OpenSearchDescription.xml" />
+
+<script language="javascript">
+
+function print_list()
+{
+    
+		document.execCommand('Print', 1, 'MyTitleList.htm');
+	
+}
+
+function save_list()
+{
+    
+	    document.execCommand('SaveAs', 1 , 'MyTitleList.htm');
+	
+}
+
+function delete_list()
+{
+    var msg = "Do you want to remove all titles from your Temporary List?";
+    
+    
+    if (document.frmTitleList.dropdownListNames.value != "__WORKINGLIST__")
+        msg = "Do you want to delete this list from your account?";
+    
+
+    if (confirm(msg))
+        __doPostBack('linkDeleteList','');
+
+    return false;
+}
+
+function ProcessInput(e)
+{
+    if (window.event) // IE
+        keyNum = e.keyCode;
+    else if (e.which) // Netscape/Firefox/Opera
+        keyNum = e.which;
+
+	if (keyNum == 13)
+	{
+	    e.returnValue = false;
+	    e.cancelBubble = true;
+	    email_list();
+	    return false;
+	}
+	
+	return true;
+}
+
+function email_list()
+{
+	if (document.frmTitleList.textboxEmailAddress.value == "")
+		alert("You must enter an email address.");
+	else if (document.frmTitleList.textboxEmailAddress.value.indexOf("@") == -1)
+		alert("You must enter a valid email address. The specified email address was missing the @ character.");
+	else
+	    __doPostBack('linkSendEmail', document.frmTitleList.textboxEmailAddress.value);
+
+	return false;
+}
+
+function getElement(id)
+{
+    var element;
+    
+	if (document.getElementById)
+        element = document.getElementById(id);
+	else if (document.all)
+		element = document.all[id];
+	else if (document.layers)
+		element = document.layers[id];
+
+    return element;
+}
+
+function move_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=move&from=Forces & Energy - Juv&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkMoveToList', pos + "|Forces & Energy - Juv|" + e.value);
+}
+
+function copy_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=copy&from=Forces & Energy - Juv&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkCopyToList', pos + "|Forces & Energy - Juv|" + e.value);
+}
+
+function toggle(e) 
+{
+	doToggle(e, 'https://catalog.mdpls.org/custom/themes/miami/plus.bmp', 
+	         'https://catalog.mdpls.org/custom/themes/miami/minus.bmp', 
+	         'Click to show list of items',
+	         'Click to hide details'); 
+}
+
+//document.onclick = toggle(event);									
+		
+</script>
+
+	</HEAD>
+
+	<body onscroll="ResetTimer();" onload="" onclick="javascript:toggle(event); ResetTimer();">
+	<form name="frmTitleList" method="post" action="titlelist.aspx" id="frmTitleList">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU4NzA2NzQ0Mw8WBh4LQ3VycmVudFZpZXcLKW9Qb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0N1cnJlbnRWaWV3cywgQXBwX1dlYl8za2N6ZTJ1MywgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAHg9Ib2xkaW5nc0Rpc3BsYXkLKXNQb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0hvbGRpbmdzRGlzcGxheXMsIEFwcF9XZWJfM2tjemUydTMsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4TUHJpbnRlckZyaWVuZGx5Vmlld2cWDGYPFQMgTWlhbWktRGFkZSBQdWJsaWMgTGlicmFyeSBTeXN0ZW0aaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy+FAzxsaW5rIHR5cGU9InRleHQvY3NzIiByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9zdHlsZXMuY3NzIj48bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL2ljbyIgaHJlZj0iaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9mYXZpY29uLmljbyIgLz48bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgdGl0bGU9Ik1pYW1pLURhZGUgUHVibGljIExpYnJhcnkgU3lzdGVtIiBocmVmPSJodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvRVJNU0RhZW1vbi9SRVNUL1BPTEFSSVMvUEFDL0tXL09wZW5TZWFyY2hEZXNjcmlwdGlvbi54bWwiIC8+ZAIBDxUBRVRvIHNhdmUgdGhpcyBwYWdlIHRvIGRpc2ssIHNlbGVjdCB0aGUgc2F2ZSBvcHRpb24gZnJvbSB0aGUgRmlsZSBtZW51LmQCAg8VATpEbyB5b3Ugd2FudCB0byByZW1vdmUgYWxsIHRpdGxlcyBmcm9tIHlvdXIgVGVtcG9yYXJ5IExpc3Q/ZAIDD2QWAmYPFQEyRG8geW91IHdhbnQgdG8gZGVsZXRlIHRoaXMgbGlzdCBmcm9tIHlvdXIgYWNjb3VudD9kAgQPFQ0gaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8VRm9yY2VzICYgRW5lcmd5IC0gSnV2EGN0eD0xLjEwMzMuMC4wLjYVRm9yY2VzICYgRW5lcmd5IC0gSnV2IGh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9TZWFyY2gvFUZvcmNlcyAmIEVuZXJneSAtIEp1dhBjdHg9MS4xMDMzLjAuMC42FUZvcmNlcyAmIEVuZXJneSAtIEp1djZodHRwczovL2NhdGFsb2cubWRwbHMub3JnL2N1c3RvbS90aGVtZXMvbWlhbWkvcGx1cy5ibXA3aHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9jdXN0b20vdGhlbWVzL21pYW1pL21pbnVzLmJtcBtDbGljayB0byBzaG93IGxpc3Qgb2YgaXRlbXMVQ2xpY2sgdG8gaGlkZSBkZXRhaWxzAGQCBQ9kFgYCAQ8PFgIeB1Zpc2libGVoZBYIZg9kFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAIBDxYCHwNoZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgMPZBYCZg9kFgZmD2QWAmYPDxYCHwNoZBYGZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZAIBD2QWCAIBDxYCHwNoFhRmDxUBGUZvcmNlcyAmYW1wOyBFbmVyZ3kgLSBKdXZkAgEPD2QWAh4Hb25jbGljawUUcmV0dXJuIGRlbGV0ZV9saXN0KCkWAmYPFQELRGVsZXRlIExpc3RkAgIPZBYCAgEPZBYCZg8VARBQcmludGVyIEZyaWVuZGx5ZAIDD2QWAgIBD2QWAmYPFQEKRW1haWwgTGlzdGQCBQ9kFgRmDxUBCVNob3cgTGlzdGQCAQ8QDxYCHgtfIURhdGFCb3VuZGdkEBUJDlRlbXBvcmFyeSBMaXN0FENyZWF0aXZpdHkgLSBQcmltYXJ5FUN1c3RvbXMgJiBUcmFkcyAtIEp1dhVGb3JjZXMgJiBFbmVyZ3kgLSBKdXYOTWFjaGluZXMgLSBKdXYTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkVCQ9fX1dPUktJTkdMSVNUX18UQ3JlYXRpdml0eSAtIFByaW1hcnkVQ3VzdG9tcyAmIFRyYWRzIC0gSnV2FUZvcmNlcyAmIEVuZXJneSAtIEp1dg5NYWNoaW5lcyAtIEp1dhNSZWN5Y2xpbmcgLSBQcmltYXJ5FFNlbGYtQXdhcmVuZXNzIC0gSnV2GFRyYW5zcG9ydGF0aW9uIC0gUHJpbWFyeRdXYW50cyAmIE5lZWRzIC0gUHJpbWFyeRQrAwlnZ2dnZ2dnZ2cWAQIDZAIGDxUBB0Zvcm1hdDpkAgcPEA8WAh8FZ2QPFgRmAgECAgIDFgQQBRNCcmllZiBCaWJsaW9ncmFwaGljBQEwZxAFEkZ1bGwgQmlibGlvZ3JhcGhpYwUBMWcQBRdDaGljYWdvIE1hbnVhbCBvZiBTdHlsZQUBMmcQBRxBbWVyaWNhbiBQc3ljaC4gQXNzb2MuIChBUEEpBQEzZxYBZmQCCQ8WAh8DaBYEZg8VARRJbmNsdWRlIEF2YWlsYWJpbGl0eWQCAQ8QDxYCHwVnZA8WA2YCAQICFgMQBQROb25lBQEwZxAFEkxvY2FsIEF2YWlsYWJpbGl0eQUBMWcQBRNTeXN0ZW0gQXZhaWxhYmlsaXR5BQEyZxYBZmQCCw9kFgJmDxUDIWh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvU2VhcmNoLxBjdHg9MS4xMDMzLjAuMC42G0NyZWF0ZSBuZXcgc2F2ZWQgdGl0bGUgbGlzdGQCDA8WAh8DaBYCZg8VBRpodHRwczovL2NhdGFsb2cubWRwbHMub3JnLzxodHRwcyUzYSUyZiUyZmNhdGFsb2cubWRwbHMub3JnJTJmU2VhcmNoJTJmJTJmdGl0bGVsaXN0LmFzcHgQY3R4PTEuMTAzMy4wLjAuNgZMb2cgaW4cYW5kIG1vdmUgdG8gYSBwZXJtYW5lbnQgbGlzdGQCAg8WAh8DZxYIAgEPZBYCZg8VAQVQcmludGQCAg9kFgJmDxUBDFNhdmUgdG8gRGlza2QCAw9kFgICAQ8PZBYCHwQFE3JldHVybiBlbWFpbF9saXN0KCkWAmYPFQENRW1haWwgTGlzdCB0b2QCBA8VAxpodHRwczovL2NhdGFsb2cubWRwbHMub3JnLxJCYWNrIHRvIFRpdGxlIExpc3QVRm9yY2VzICYgRW5lcmd5IC0gSnV2ZAIDDw8WAh8DaGQWAmYPFQEAZAIEDxYCHwNoFgJmDxUBTVBsZWFzZSBjaGVjayB0aGUgZm9ybWF0dGluZyByZXF1aXJlbWVudHMgb2YgeW91ciBzY2hvb2wsIGNvbGxlZ2UsIG9yIGpvdXJuYWwuZAICD2QWAmYPDxYCHwNoZBYIZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZAIFDw8WAh8DaGQWCGYPFgIfA2gWAmYPFQI+aHR0cDovL2NhdGFsb2cubWRwbHMub3JnL2RlZmF1bHQuYXNweD9jdHg9X19vcmdpZF9fLjEwMzMuMC4wLjZ3SmF2YVNjcmlwdCBoYXMgYmVlbiBkaXNhYmxlZCBpbiB5b3VyIGJyb3dzZXIuIFBsZWFzZSBlbmFibGUgSmF2YVNjcmlwdCBpbiBvcmRlciB0byBlbmpveSBhbGwgdGhlIGZlYXR1cmVzIG9mIHRoaXMgc2l0ZS5kAgEPFgIfA2hkAgIPFgIfA2gWAmYPFQEAZAIDDxYCHwNoFgJmDxUBAGRkxkberiWIC1kLRlr32zNcME5ol3ZX727B+sy7KaKiPG0=" />
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['frmTitleList'];
+if (!theForm) {
+    theForm = document.frmTitleList;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+		
+	
+	
+	<table cellspacing="0" cellpadding="0" border="0" style="border-width:0px;width:100%;border-collapse:collapse;">
+	<tr>
+		<td class="LeftPanel" valign="top" style="width:1%;"></td><td align="left" valign="top" style="width:100%;">
+		    <a name="maincontent"></a>
+		    
+			    <br />
+			    <table width=100%><tr>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a href="javascript:void(print_list())">Print</a>&nbsp;
+			            </td>
+			        
+			            <td nowrap width="1%" class="CustomButton">
+				            &nbsp;<a href="javascript:void(save_list())">Save to Disk</a>&nbsp;
+				        </td> 
+			        
+			            <td nowrap width="1%" class="CustomButton">
+			                &nbsp;<a onclick="return email_list();" id="linkSendEmail" href="javascript:__doPostBack(&#39;linkSendEmail&#39;,&#39;&#39;)">Email List to:</a>&nbsp;
+			            </td>
+			            <td nowrap width=1%>
+			                &nbsp;<input type="text" size="25" id="textboxEmailAddress" onkeypress="return ProcessInput(event)" />&nbsp;
+			            </td>
+	                
+	                <td width=1% nowrap>&nbsp;&nbsp;&nbsp;</td>         
+			        <td nowrap width="1%" class="CustomButton">
+			            &nbsp;<a href="https://catalog.mdpls.org/search/titlelist.aspx">Back to Title List</a>&nbsp;
+			        </td>
+			        <td width=100%>&nbsp;</td>
+			            
+				</tr></table>
+				<br />		
+		        <div class=TitleListHeading>Forces & Energy - Juv</div>
+		        
+		        <script language="javascript">
+		        	document.getElementById('textboxEmailAddress').focus();
+                </script>
+
+			<div id="panelBibliography">
+			
+	
+	<table border=0 cellpadding=6 cellspacing=6 width="100%">
+	
+		
+
+		
+				<tr>
+					<td>
+						<table border="0" width="100%">
+    		                <tr>
+	    		                <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" width="100%" alt="" height="1"></td>
+	    	                </tr>
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos1" />
+						<img title="Force &amp; motion" src="https://secure.syndetics.com/hw7.pl?isbn=0789448823/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=42465955" alt="Force &amp; motion" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1999</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=442433&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Force & motion</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531 LAFF J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Lafferty, Peter.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1st American ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : DK Pub., 1999, 1992., 1999</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">64 p. : col. ill. ; 29 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0789448823</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos2" />
+						<img title="All about forces &amp; gravity" src="https://secure.syndetics.com/hw7.pl?isbn=9781572259409/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=56699734" alt="All about forces &amp; gravity" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2004</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=696489&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>All about forces & gravity</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">500.2 PHYS n.3 DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Wynnewood, PA : Schlessinger Media, c2004., 2004</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (23 min.) : sd., col. ; 4 3/4 in. + 1 teacher's guide (5 p.)</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781572259409</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos3" />
+						<img title="Experiments with energy" src="https://secure.syndetics.com/hw7.pl?isbn=0516227866/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=50645473" alt="Experiments with energy" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2003</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=668318&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Experiments with energy</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 TOCC J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Tocci, Salvatore.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Children's Press, c2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">47 p. : col. ill. ; 22 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0516227866 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos4" />
+						<img title="Can you feel the force?" src="https://secure.syndetics.com/hw7.pl?isbn=0756620333/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=69021021" alt="Can you feel the force?" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2006</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=780000&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Can you feel the force?</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">530 HAMM J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Hammond, Richard, 1969-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Edition:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1st American ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : DK Pub., c2006., 2006</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">96 p. : ill. (chiefly col.) ; 29 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0756620333</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos5" />
+						<img title="Forces make things move" src="https://secure.syndetics.com/hw7.pl?isbn=0060289074/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Forces make things move" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2005</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=743295&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Forces make things move</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 BRAD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Bradley, Kimberly Brubaker.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York, N.Y. : HarperCollins, c2005., 2005</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">33 p. : col. ill. ; 21 x 26 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0060289074 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos6" />
+						<img title="Sports science projects : the physics of balls in motion" src="https://secure.syndetics.com/hw7.pl?isbn=0766011747/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=40180199" alt="Sports science projects : the physics of balls in motion" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>1999</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=442652&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Sports science projects : the physics of balls in motion</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">507.8 GOOD Y</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Goodstein, Madeline P.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Springfield, N.J. : Enslow Publishers, c1999., 1999</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">128 p. : ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0766011747</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos7" />
+						<img title="All about magnets" src="https://secure.syndetics.com/hw7.pl?isbn=1572259426/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=56699859" alt="All about magnets" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2004</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=696487&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>All about magnets</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">500.2 PHYS n.5 DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Wynnewood, PA : Schlessinger Media, c2004., 2004</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (23 min.) : sd., col. ; 4 3/4 in. + 1 teacher's guide.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1572259426</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos8" />
+						<img title="Energy makes things happen" src="https://secure.syndetics.com/hw7.pl?isbn=0060289090/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Energy makes things happen" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2003</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=630813&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Energy makes things happen</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 BRAD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Bradley, Kimberly Brubaker.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : HarperCollins Publishers, c2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">33 p. : col. ill. ; 21 x 27 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0060289090 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos9" />
+						<img title="Force &amp; motion" src="https://secure.syndetics.com/hw7.pl?isbn=159716061X/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Force &amp; motion" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2006</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=752780&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Force & motion</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 TWIS J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Twist, Clint.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Bearport, c2006., 2006</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">24 p. : col. ill. ; 22 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">159716061X (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos10" />
+						<img title="Energy" src="https://secure.syndetics.com/hw7.pl?isbn=0789455765/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Energy" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2000</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=460022&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Energy</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">621.042 CHAL J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Challoner, Jack.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">London ; New York : Dorling Kindersley, c2000., 2000</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">64 p. : ill. (some col.) ; 29 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0789455765</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos11" />
+						<img title="Matter and energy" src="https://secure.syndetics.com/hw7.pl?isbn=9781403479174/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Matter and energy" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=829589&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Matter and energy</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">530.4 WHIT J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Whitehouse, Patricia, 1958-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago, Ill. : Heinemann Library, c2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">48 p. : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781403479174 (hc)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos12" />
+						<img title="What is energy? : exploring science with hands-on activities" src="https://secure.syndetics.com/hw7.pl?isbn=0766030997/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="What is energy? : exploring science with hands-on activities" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=879388&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>What is energy? : exploring science with hands-on activities</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">621.4007 SPIL J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Spilsbury, Richard, 1963-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Berkeley Heights, N.J. : Enslow Elementary, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0766030997 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos13" />
+						<img title="Forces and motion : from push to shove" src="https://secure.syndetics.com/hw7.pl?isbn=140340951X/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Forces and motion : from push to shove" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2004</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=679269&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Forces and motion : from push to shove</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 COOP J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Cooper, Christopher, 1944-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago, Ill. : Heinemann Library, c2004., 2004</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">140340951X (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos14" />
+						<img title="Turning up the heat : energy" src="https://secure.syndetics.com/hw7.pl?isbn=1403448175/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=52837911" alt="Turning up the heat : energy" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2005</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=723385&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Turning up the heat : energy</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 FULL J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Fullick, Ann, 1956-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago, Ill. : Heinemann Library, c2005., 2005</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">56 p. : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1403448175</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos15" />
+						<img title="Energy" src="https://secure.syndetics.com/hw7.pl?isbn=/SC.GIF&amp;client=midap&amp;upc=709629002036&amp;oclc=54439302" alt="Energy" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="DVD" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid33.gif" alt="DVD" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2003</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=705283&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Energy</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 ENER DVD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Venice, Calif. : TMW Media Group, c2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1 videodisc (22 min.) : sd., col. ; 4 3/4 in. + 1 teacher's guide + 1 quiz.</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos16" />
+						<img title="Dr. Art&#39;s guide to science : connecting atoms, galaxies, and everything in between" src="https://secure.syndetics.com/hw7.pl?isbn=9780787983260/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=62762298" alt="Dr. Art&#39;s guide to science : connecting atoms, galaxies, and everything in between" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2006</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=768664&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Dr. Art's guide to science : connecting atoms, galaxies, and everything in between</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">500 SUSS J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Sussman, Art, 1944-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">San Francisco : Jossey-Bass, c2006., 2006</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">x, 246 p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780787983260 (alk. paper)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos17" />
+						<img title="Experiments with motion" src="https://secure.syndetics.com/hw7.pl?isbn=0516226037/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Experiments with motion" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2003</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=642923&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Experiments with motion</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.11 TOCC J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Tocci, Salvatore.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">New York : Children's Press, c2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">47 p. : col. ill. ; 23 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0516226037</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos18" />
+						<img title="Gravity" src="https://secure.syndetics.com/hw7.pl?isbn=1403481725/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=63171099" alt="Gravity" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2006</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=789444&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Gravity</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.14 OXLA J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Oxlade, Chris.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago : Heinemann Library, c2006., 2006</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1403481725 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos19" />
+						<img title="Friction and resistance" src="https://secure.syndetics.com/hw7.pl?isbn=1403481717/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Friction and resistance" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2007</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=789443&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Friction and resistance</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.1134 OXLA J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Oxlade, Chris.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago : Heinemann Library, c2007., 2007</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1403481717 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos20" />
+						<img title="Force and motion : laws of movement" src="https://secure.syndetics.com/hw7.pl?isbn=9780756532642/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=81944518" alt="Force and motion : laws of movement" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=841840&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Force and motion : laws of movement</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 NARD J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Nardo, Don, 1947-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Minneapolis, Minn. : Compass Point Books, c2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">48 p. : ill. (chiefly col.) ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9780756532642</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos21" />
+						<img title="Forces and motion" src="https://secure.syndetics.com/hw7.pl?isbn=0739810073/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Forces and motion" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2001</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=558894&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Forces and motion</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 LAFF J R</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Lafferty, Peter.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Austin, Tex. : Raintree Steck-Vaughn Publishers, c2001., 2001</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">45 p. : col. ill. ; 29 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0739810073</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos22" />
+						<img title="What are forces and motion? : exploring science with hands-on activities" src="https://secure.syndetics.com/hw7.pl?isbn=0766030954/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="What are forces and motion? : exploring science with hands-on activities" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=879384&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>What are forces and motion? : exploring science with hands-on activities</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6078 SPIL J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Spilsbury, Richard, 1963-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Berkeley Heights, N.J. : Enslow Elementary, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">32 p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">0766030954 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos23" />
+						<img title="Under pressure : forces" src="https://secure.syndetics.com/hw7.pl?isbn=1403448183/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Under pressure : forces" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2005</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=723386&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Under pressure : forces</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 FULL J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Fullick, Ann, 1956-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago : Heinemann Library, c2005., 2005</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">56 p. : col. ill., col. map ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">1403448183 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos24" />
+						<img title="Energy" src="https://secure.syndetics.com/hw7.pl?isbn=9781403499240/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=87418283" alt="Energy" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=837755&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Energy</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.6 MORG J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Morgan, Sally.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago, Ill. : Heinemann Library, c2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">64 p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781403499240 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td width="1%" valign=top align=center>
+					    <a name="__pos25" />
+						<img title="Forces and motion" src="https://secure.syndetics.com/hw7.pl?isbn=9781403499233/SC.GIF&amp;client=midap&amp;upc=&amp;oclc=" alt="Forces and motion" align="top" border="0" />
+					</td>
+
+					<td width="1%" valign=top align=center>
+						<img title="Book" src="https://catalog.mdpls.org/custom/themes/miami/formats/formatid01.gif" alt="Book" align="top" style="border-width:0px;" /><br>
+						<div class=ResultsDate>2008</div>
+					</td>
+
+					<td width="100%" valign=top>
+					
+						<table border=0 width=100% cellspacing=0 cellpadding=0>
+							
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Title:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results"><a href=http://catalog.mdpls.org/Search/searchresults.aspx?term=837761&by=CN&limit=TOM%3D*&type=Keyword&page=0&using=40&ctx=1.1033.0.0.6>Forces and motion</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											&nbsp;&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Call Number:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">531.11 DREI J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Author:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Dreier, David Louis.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Publisher, Date:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">Chicago, Ill. : Heinemann Library, c2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											Description:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">64 p. : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width=1% align=right valign=top nowrap>
+											ISBN:&nbsp;
+										</td>
+										<td width=100% align=left valign=top>
+											<font class="results">9781403499233 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td width="100%" align="center" colspan="3"><img border="0" src="https://catalog.mdpls.org/custom/themes/miami/separator_bar.gif" alt="" width="100%" height="1"></td>
+	    	    </tr>
+	    	    
+			
+						</table>
+					</td>
+				</tr>
+			
+
+	</table>
+	
+	
+		</div></td><td class="RightPanel" valign="top" style="width:1%;"></td>
+	</tr>
+</table>
+	
+
+	</form>
+	</body>
+
+</HTML>

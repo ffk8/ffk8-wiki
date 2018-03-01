@@ -1,0 +1,1971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Miami-Dade Public Library System</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<script language="javascript" src="Jobs%20%28Primary%29_files/powerpac.js"></script>
+		<link type="text/css" rel="stylesheet" href="Jobs%20%28Primary%29_files/styles.css"><link rel="shortcut icon" type="image/ico" href="https://catalog.mdpls.org/favicon.ico"><link rel="search" type="application/opensearchdescription+xml" title="Miami-Dade Public Library System" href="http://catalog.mdpls.org/ERMSDaemon/REST/POLARIS/PAC/KW/OpenSearchDescription.xml">
+
+<script language="javascript">
+
+function print_list()
+{
+    
+		print();
+	
+}
+
+function save_list()
+{
+    
+		alert("To save this page to disk, select the save option from the File menu.");
+	
+}
+
+function delete_list()
+{
+    var msg = "Do you want to remove all titles from your Temporary List?";
+    
+    
+    if (document.frmTitleList.dropdownListNames.value != "__WORKINGLIST__")
+        msg = "Do you want to delete this list from your account?";
+    
+
+    if (confirm(msg))
+        __doPostBack('linkDeleteList','');
+
+    return false;
+}
+
+function ProcessInput(e)
+{
+    if (window.event) // IE
+        keyNum = e.keyCode;
+    else if (e.which) // Netscape/Firefox/Opera
+        keyNum = e.which;
+
+	if (keyNum == 13)
+	{
+	    e.returnValue = false;
+	    e.cancelBubble = true;
+	    email_list();
+	    return false;
+	}
+	
+	return true;
+}
+
+function email_list()
+{
+	if (document.frmTitleList.textboxEmailAddress.value == "")
+		alert("You must enter an email address.");
+	else if (document.frmTitleList.textboxEmailAddress.value.indexOf("@") == -1)
+		alert("You must enter a valid email address. The specified email address was missing the @ character.");
+	else
+	    __doPostBack('linkSendEmail', document.frmTitleList.textboxEmailAddress.value);
+
+	return false;
+}
+
+function getElement(id)
+{
+    var element;
+    
+	if (document.getElementById)
+        element = document.getElementById(id);
+	else if (document.all)
+		element = document.all[id];
+	else if (document.layers)
+		element = document.layers[id];
+
+    return element;
+}
+
+function move_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=move&from=Jobs - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkMoveToList', pos + "|Jobs - Primary|" + e.value);
+}
+
+function copy_title(pos)
+{
+    var e = getElement("list_move_to_" + pos);
+
+    if (e.value == "__NEW__")
+        window.location = "http://catalog.mdpls.org/Search/titlelistnew.aspx?action=copy&from=Jobs - Primary&pos=" + pos + "&ctx=1.1033.0.0.6";
+    else   
+        __doPostBack('linkCopyToList', pos + "|Jobs - Primary|" + e.value);
+}
+
+function toggle(e) 
+{
+	doToggle(e, 'https://catalog.mdpls.org/custom/themes/miami/plus.bmp', 
+	         'https://catalog.mdpls.org/custom/themes/miami/minus.bmp', 
+	         'Click to show list of items',
+	         'Click to hide details'); 
+}
+
+//document.onclick = toggle(event);									
+		
+</script>
+
+	</head>
+
+	<body onscroll="ResetTimer();" onload="" onclick="javascript:toggle(event); ResetTimer();">
+	<form name="frmTitleList" method="post" action="titlelist.aspx" id="frmTitleList">
+<input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+<input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU4NzA2NzQ0Mw8WBh4LQ3VycmVudFZpZXcLKW9Qb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0N1cnJlbnRWaWV3cywgQXBwX1dlYl8za2N6ZTJ1MywgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAHg9Ib2xkaW5nc0Rpc3BsYXkLKXNQb3dlclBBQy5zZWFyY2gudGl0bGVsaXN0K0hvbGRpbmdzRGlzcGxheXMsIEFwcF9XZWJfM2tjemUydTMsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAB4TUHJpbnRlckZyaWVuZGx5Vmlld2cWDGYPFQMgTWlhbWktRGFkZSBQdWJsaWMgTGlicmFyeSBTeXN0ZW0aaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy+FAzxsaW5rIHR5cGU9InRleHQvY3NzIiByZWw9InN0eWxlc2hlZXQiIGhyZWY9Imh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9zdHlsZXMuY3NzIj48bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL2ljbyIgaHJlZj0iaHR0cHM6Ly9jYXRhbG9nLm1kcGxzLm9yZy9mYXZpY29uLmljbyIgLz48bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgdGl0bGU9Ik1pYW1pLURhZGUgUHVibGljIExpYnJhcnkgU3lzdGVtIiBocmVmPSJodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvRVJNU0RhZW1vbi9SRVNUL1BPTEFSSVMvUEFDL0tXL09wZW5TZWFyY2hEZXNjcmlwdGlvbi54bWwiIC8+ZAIBDxUBRVRvIHNhdmUgdGhpcyBwYWdlIHRvIGRpc2ssIHNlbGVjdCB0aGUgc2F2ZSBvcHRpb24gZnJvbSB0aGUgRmlsZSBtZW51LmQCAg8VATpEbyB5b3Ugd2FudCB0byByZW1vdmUgYWxsIHRpdGxlcyBmcm9tIHlvdXIgVGVtcG9yYXJ5IExpc3Q/ZAIDD2QWAmYPFQEyRG8geW91IHdhbnQgdG8gZGVsZXRlIHRoaXMgbGlzdCBmcm9tIHlvdXIgYWNjb3VudD9kAgQPFQ0gaHR0cDovL2NhdGFsb2cubWRwbHMub3JnL1NlYXJjaC8OSm9icyAtIFByaW1hcnkQY3R4PTEuMTAzMy4wLjAuNg5Kb2JzIC0gUHJpbWFyeSBodHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvU2VhcmNoLw5Kb2JzIC0gUHJpbWFyeRBjdHg9MS4xMDMzLjAuMC42DkpvYnMgLSBQcmltYXJ5Nmh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvY3VzdG9tL3RoZW1lcy9taWFtaS9wbHVzLmJtcDdodHRwczovL2NhdGFsb2cubWRwbHMub3JnL2N1c3RvbS90aGVtZXMvbWlhbWkvbWludXMuYm1wG0NsaWNrIHRvIHNob3cgbGlzdCBvZiBpdGVtcxVDbGljayB0byBoaWRlIGRldGFpbHMAZAIFD2QWBgIBDw8WAh4HVmlzaWJsZWhkFghmD2QWAmYPFQI+aHR0cDovL2NhdGFsb2cubWRwbHMub3JnL2RlZmF1bHQuYXNweD9jdHg9X19vcmdpZF9fLjEwMzMuMC4wLjZ3SmF2YVNjcmlwdCBoYXMgYmVlbiBkaXNhYmxlZCBpbiB5b3VyIGJyb3dzZXIuIFBsZWFzZSBlbmFibGUgSmF2YVNjcmlwdCBpbiBvcmRlciB0byBlbmpveSBhbGwgdGhlIGZlYXR1cmVzIG9mIHRoaXMgc2l0ZS5kAgEPFgIfA2hkAgIPFgIfA2gWAmYPFQEAZAIDDxYCHwNoFgJmDxUBAGQCAw9kFgJmD2QWBmYPZBYCZg8PFgIfA2hkFgZmDxYCHwNoFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgEPZBYIAgEPFgIfA2gWFGYPFQEOSm9icyAtIFByaW1hcnlkAgEPD2QWAh4Hb25jbGljawUUcmV0dXJuIGRlbGV0ZV9saXN0KCkWAmYPFQELRGVsZXRlIExpc3RkAgIPZBYCAgEPZBYCZg8VARBQcmludGVyIEZyaWVuZGx5ZAIDD2QWAgIBD2QWAmYPFQEKRW1haWwgTGlzdGQCBQ9kFgRmDxUBCVNob3cgTGlzdGQCAQ8QDxYCHgtfIURhdGFCb3VuZGdkEBUPDlRlbXBvcmFyeSBMaXN0FENyZWF0aXZpdHkgLSBQcmltYXJ5FUN1c3RvbXMgJiBUcmFkcyAtIEp1dhFFbmVyZ3kgKEp1dmVuaWxlKRVGb3JjZXMgJiBFbmVyZ3kgLSBKdXYPSG9tZXMgLSBQcmltYXJ5GEludmVzdGlnYXRpb24gLSBKdXZlbmlsZQ5Kb2JzIC0gUHJpbWFyeQ5NYWNoaW5lcyAtIEp1dhZNdXNpYywgRGFuY2UgJiBBcnQgKEopGVJlY29uc3RydWN0aW9uIChKdXZlbmlsZSkTUmVjeWNsaW5nIC0gUHJpbWFyeRRTZWxmLUF3YXJlbmVzcyAtIEp1dhhUcmFuc3BvcnRhdGlvbiAtIFByaW1hcnkXV2FudHMgJiBOZWVkcyAtIFByaW1hcnkVDw9fX1dPUktJTkdMSVNUX18UQ3JlYXRpdml0eSAtIFByaW1hcnkVQ3VzdG9tcyAmIFRyYWRzIC0gSnV2EUVuZXJneSAoSnV2ZW5pbGUpFUZvcmNlcyAmIEVuZXJneSAtIEp1dg9Ib21lcyAtIFByaW1hcnkYSW52ZXN0aWdhdGlvbiAtIEp1dmVuaWxlDkpvYnMgLSBQcmltYXJ5Dk1hY2hpbmVzIC0gSnV2Fk11c2ljLCBEYW5jZSAmIEFydCAoSikZUmVjb25zdHJ1Y3Rpb24gKEp1dmVuaWxlKRNSZWN5Y2xpbmcgLSBQcmltYXJ5FFNlbGYtQXdhcmVuZXNzIC0gSnV2GFRyYW5zcG9ydGF0aW9uIC0gUHJpbWFyeRdXYW50cyAmIE5lZWRzIC0gUHJpbWFyeRQrAw9nZ2dnZ2dnZ2dnZ2dnZ2cWAQIHZAIGDxUBB0Zvcm1hdDpkAgcPEA8WAh8FZ2QPFgRmAgECAgIDFgQQBRNCcmllZiBCaWJsaW9ncmFwaGljBQEwZxAFEkZ1bGwgQmlibGlvZ3JhcGhpYwUBMWcQBRdDaGljYWdvIE1hbnVhbCBvZiBTdHlsZQUBMmcQBRxBbWVyaWNhbiBQc3ljaC4gQXNzb2MuIChBUEEpBQEzZxYBZmQCCQ8WAh8DaBYEZg8VARRJbmNsdWRlIEF2YWlsYWJpbGl0eWQCAQ8QDxYCHwVnZA8WA2YCAQICFgMQBQROb25lBQEwZxAFEkxvY2FsIEF2YWlsYWJpbGl0eQUBMWcQBRNTeXN0ZW0gQXZhaWxhYmlsaXR5BQEyZxYBZmQCCw9kFgJmDxUDIWh0dHBzOi8vY2F0YWxvZy5tZHBscy5vcmcvU2VhcmNoLxBjdHg9MS4xMDMzLjAuMC42G0NyZWF0ZSBuZXcgc2F2ZWQgdGl0bGUgbGlzdGQCDA8WAh8DaBYCZg8VBRpodHRwczovL2NhdGFsb2cubWRwbHMub3JnLzxodHRwcyUzYSUyZiUyZmNhdGFsb2cubWRwbHMub3JnJTJmU2VhcmNoJTJmJTJmdGl0bGVsaXN0LmFzcHgQY3R4PTEuMTAzMy4wLjAuNgZMb2cgaW4cYW5kIG1vdmUgdG8gYSBwZXJtYW5lbnQgbGlzdGQCAg8WAh8DZxYIAgEPZBYCZg8VAQVQcmludGQCAg9kFgJmDxUBDFNhdmUgdG8gRGlza2QCAw9kFgICAQ8PZBYCHwQFE3JldHVybiBlbWFpbF9saXN0KCkWAmYPFQENRW1haWwgTGlzdCB0b2QCBA8VAxpodHRwczovL2NhdGFsb2cubWRwbHMub3JnLxJCYWNrIHRvIFRpdGxlIExpc3QOSm9icyAtIFByaW1hcnlkAgMPDxYCHwNoZBYCZg8VAQBkAgQPFgIfA2gWAmYPFQFNUGxlYXNlIGNoZWNrIHRoZSBmb3JtYXR0aW5nIHJlcXVpcmVtZW50cyBvZiB5b3VyIHNjaG9vbCwgY29sbGVnZSwgb3Igam91cm5hbC5kAgIPZBYCZg8PFgIfA2hkFghmDxYCHwNoFgJmDxUCPmh0dHA6Ly9jYXRhbG9nLm1kcGxzLm9yZy9kZWZhdWx0LmFzcHg/Y3R4PV9fb3JnaWRfXy4xMDMzLjAuMC42d0phdmFTY3JpcHQgaGFzIGJlZW4gZGlzYWJsZWQgaW4geW91ciBicm93c2VyLiBQbGVhc2UgZW5hYmxlIEphdmFTY3JpcHQgaW4gb3JkZXIgdG8gZW5qb3kgYWxsIHRoZSBmZWF0dXJlcyBvZiB0aGlzIHNpdGUuZAIBDxYCHwNoZAICDxYCHwNoFgJmDxUBAGQCAw8WAh8DaBYCZg8VAQBkAgUPDxYCHwNoZBYIZg8WAh8DaBYCZg8VAj5odHRwOi8vY2F0YWxvZy5tZHBscy5vcmcvZGVmYXVsdC5hc3B4P2N0eD1fX29yZ2lkX18uMTAzMy4wLjAuNndKYXZhU2NyaXB0IGhhcyBiZWVuIGRpc2FibGVkIGluIHlvdXIgYnJvd3Nlci4gUGxlYXNlIGVuYWJsZSBKYXZhU2NyaXB0IGluIG9yZGVyIHRvIGVuam95IGFsbCB0aGUgZmVhdHVyZXMgb2YgdGhpcyBzaXRlLmQCAQ8WAh8DaGQCAg8WAh8DaBYCZg8VAQBkAgMPFgIfA2gWAmYPFQEAZGQwq+qcPgQ9QpjK/jHEip7HKdhpvBaGiAKnMDsu2dxc7w==" type="hidden">
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['frmTitleList'];
+if (!theForm) {
+    theForm = document.frmTitleList;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+		
+	
+	
+	<table style="border-width: 0px; width: 100%; border-collapse: collapse;" border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td class="LeftPanel" style="width: 1%;" valign="top"></td><td style="width: 100%;" valign="top" align="left">
+		    <a name="maincontent"></a>
+		    
+			    <br>
+			    <table width="100%"><tbody><tr>
+			        
+			            <td class="CustomButton" nowrap="nowrap" width="1%">
+			                &nbsp;<a href="javascript:void(print_list())">Print</a>&nbsp;
+			            </td>
+			        
+			            <td class="CustomButton" nowrap="nowrap" width="1%">
+				            &nbsp;<a href="javascript:void(save_list())">Save to Disk</a>&nbsp;
+				        </td> 
+			        
+			            <td class="CustomButton" nowrap="nowrap" width="1%">
+			                &nbsp;<a onclick="return email_list();" id="linkSendEmail" href="javascript:__doPostBack('linkSendEmail','')">Email List to:</a>&nbsp;
+			            </td>
+			            <td nowrap="nowrap" width="1%">
+			                &nbsp;<input size="25" id="textboxEmailAddress" onkeypress="return ProcessInput(event)" type="text">&nbsp;
+			            </td>
+	                
+	                <td nowrap="nowrap" width="1%">&nbsp;&nbsp;&nbsp;</td>         
+			        <td class="CustomButton" nowrap="nowrap" width="1%">
+			            &nbsp;<a href="https://catalog.mdpls.org/search/titlelist.aspx">Back to Title List</a>&nbsp;
+			        </td>
+			        <td width="100%">&nbsp;</td>
+			            
+				</tr></tbody></table>
+				<br>		
+		        <div class="TitleListHeading">Jobs - Primary</div>
+		        
+		        <script language="javascript">
+		        	document.getElementById('textboxEmailAddress').focus();
+                </script>
+
+			<div id="panelBibliography">
+			
+	
+	<table border="0" cellpadding="6" cellspacing="6" width="100%">
+	
+		
+
+		
+				<tbody><tr>
+					<td>
+						<table border="0" width="100%">
+    		                <tbody><tr>
+	    		                <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	                </tr>
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos1">
+						<img title="Jobs people do" src="Jobs%20%28Primary%29_files/hw7_010.jpg" alt="Jobs people do" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">1997</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=399496&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Jobs people do</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">371.42 MAYN J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Maynard, Christopher.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Edition:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1st American ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York, NY : DK Pub., c1997., 1997</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">31 p. : col. ill. ; 32 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0789414929 (alk. paper)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos2">
+						<img title="Mole and Shrew have jobs to do" src="Jobs%20%28Primary%29_files/hw7_007.jpg" alt="Mole and Shrew have jobs to do" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2001</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=570897&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Mole and Shrew have jobs to do</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">KOLLER J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Koller, Jackie French.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Random House, c2001., 2001</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">72 p. : ill. ; 20 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0375906916 (glb.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos3">
+						<img title="The underwear salesman : and other jobs for better or verse" src="Jobs%20%28Primary%29_files/hw7_012.jpg" alt="The underwear salesman : and other jobs for better or verse" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2009</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=901953&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">The underwear salesman : and other jobs for better or verse</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">L</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Lewis, J. Patrick.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Edition:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1st ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Atheneum Books for Young Readers, c2009., 2009</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1 v. (unpaged) : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780689853258 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos4">
+						<img title="Mommy works, daddy works" src="Jobs%20%28Primary%29_files/hw7_009.jpg" alt="Mommy works, daddy works" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2000</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=557380&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Mommy works, daddy works</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">P</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Pedersen, Marika.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Toronto ; New York : Annick Press ; Buffalo, NY : Distributed in the U.S.A. by Firefly Books (U.S.), c2000., 2000</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[32] p. : col. ill. ; 21 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1550376578</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos5">
+						<img title="Nurse = El enfermero" src="Jobs%20%28Primary%29_files/hw7_003.jpg" alt="Nurse = El enfermero" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2003</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=804369&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Nurse = El enfermero</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">331.702 ENFERMER J Sp</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Macken, JoAnn Early, 1953-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Milwaukee, Wis. : Weekly Reader Early Learning Library, 2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">24 p. : col. ill. ; 18 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780736860116 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos6">
+						<img title="Firefighter = El bombero" src="Jobs%20%28Primary%29_files/hw7_016.jpg" alt="Firefighter = El bombero" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2002</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=904478&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Firefighter = El bombero</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">331.702 FIREFIGH J Sp</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Gorman, Jacqueline Laks, 1955-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Milwaukee, Wis. : Weekly Reader Early Learning Library, 2002., 2002</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">24 p. : col. ill. ; 18 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780836833096 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos7">
+						<img title="Lazy little loafers" src="Jobs%20%28Primary%29_files/hw7_017.jpg" alt="Lazy little loafers" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2008</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=872974&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Lazy little loafers</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">O</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Orlean, Susan.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Abrams Books for Young Readers, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[30] p. : col. ill. ; 29 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780810970274 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos8">
+						<img title="Mail carrier = El cartero" src="Jobs%20%28Primary%29_files/hw7_013.jpg" alt="Mail carrier = El cartero" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2003</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=804357&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Mail carrier = El cartero</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">331.702 CARTERO J Sp</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Macken, JoAnn Early, 1953-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Milwaukee, Wis. : Weekly Reader Early Learning Library, 2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">24 p. : col. ill. ; 18 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780836836721 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos9">
+						<img title="Curious George takes a job" src="Jobs%20%28Primary%29_files/hw7.jpg" alt="Curious George takes a job" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book + Cassette" src="Jobs%20%28Primary%29_files/formatid43.gif" alt="Book + Cassette" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">1998</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=677584&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Curious George takes a job</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Book/Cassette J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Rey, H. A. (Hans Augusto), 1898-</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[Boston, Mass.] : Houghton Mifflin, p1998., 1998</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1 sound cassette : analog + 1 book (47 p. : col. ill. ; 27 cm.).</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0395891140 (set)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos10">
+						<img title="Worm gets a job" src="Jobs%20%28Primary%29_files/hw7_015.jpg" alt="Worm gets a job" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2004</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=701363&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Worm gets a job</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">C</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Caple, Kathy.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Cambridge, Mass, : Candlewick Press, 2004., 2004</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1 v. (unpaged) : col. ill. ; 25 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">076361694X (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos11">
+						<img title="Astronauts" src="Jobs%20%28Primary%29_files/hw7_006.jpg" alt="Astronauts" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2003</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=642903&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Astronauts</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Reader 2</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Bredeson, Carmen.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Children's Press, c2003., 2003</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">31 p. : ill. (some col.) ; 19 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0516225294 (lib. bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos12">
+						<img title="How Santa got his job" src="Jobs%20%28Primary%29_files/hw7_008.jpg" alt="How Santa got his job" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">1998</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=426035&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">How Santa got his job</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">K</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Krensky, Stephen.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York, NY : Simon &amp; Schuster Books for Young Readers, c1998., 1998</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[32] p. : col. ill. ; 22 x 28 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0689806973 (hardcover)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos13">
+						<img title="I want to be-- firefighter" src="Jobs%20%28Primary%29_files/hw7_014.jpg" alt="I want to be-- firefighter" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">1999</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=444208&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">I want to be-- firefighter</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">331.702 FIREFIGH J</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Maze, Stephanie.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">San Diego, Calif. : Harcourt Brace &amp; Co., c1999., 1999</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">47 p. : col. ill. ; 28 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0152018654 (hardcover)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos14">
+						<img title="I can be anything!" src="Jobs%20%28Primary%29_files/hw7_005.jpg" alt="I can be anything!" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2010</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=978059&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">I can be anything!</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">S</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Spinelli, Jerry.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Edition:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1st ed.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Little, Brown and Co. Books for Young Readers, 2010., 2010</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[32] p. : col. ill. ; 21 x 27 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780316162265 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos15">
+						<img title="Hardworking puppies" src="Jobs%20%28Primary%29_files/hw7_004.jpg" alt="Hardworking puppies" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2006</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=773956&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Hardworking puppies</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">R</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Reiser, Lynn.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Orlando : Harcourt, c2006., 2006</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1 v. (unpaged) : col. ill. ; 24 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0152054049 (hc.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos16">
+						<img title="When I grow up--" src="Jobs%20%28Primary%29_files/hw7_002.jpg" alt="When I grow up--" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">1999</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=457739&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">When I grow up--</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">H</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Horn, Peter.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : North-South Books, 1999., 1999</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[26] p. : col. ill. ; 30 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0735811482 (trade)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos17">
+						<img title="Cuando sea grande--" src="Jobs%20%28Primary%29_files/hw7_011.jpg" alt="Cuando sea grande--" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2001</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=583149&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Cuando sea grande--</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">H Sp</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Horn, Peter.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Ediciones Norte-Sur, c2001., 2001</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">1 v. (unpaged) : col. ill. ; 30 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">0735814341 (trade)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+			
+				<tr>
+					<td valign="top" width="1%" align="center">
+					    <a name="__pos18">
+						<img title="Sally gets a job" src="Jobs%20%28Primary%29_files/hw7_018.jpg" alt="Sally gets a job" border="0" align="top">
+					</a></td>
+
+					<td valign="top" width="1%" align="center">
+						<img title="Book" src="Jobs%20%28Primary%29_files/formatid01.gif" alt="Book" style="border-width: 0px;" align="top"><br>
+						<div class="ResultsDate">2008</div>
+					</td>
+
+					<td valign="top" width="100%">
+					
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+							
+									<tbody><tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Title:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results"><a href="http://catalog.mdpls.org/Search/searchresults.aspx?term=854239&amp;by=CN&amp;limit=TOM%3D*&amp;type=Keyword&amp;page=0&amp;using=40&amp;ctx=1.1033.0.0.6">Sally gets a job</a></font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											&nbsp;&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">&nbsp;</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Call Number:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">H</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Author:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">Huneck, Stephen.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Publisher, Date:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">New York : Abrams Books for Young Readers, 2008., 2008</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											Description:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">[34] p. : col. ill. ; 31 cm.</font>
+										</td>
+									</tr>
+								
+									<tr>
+										<td nowrap="nowrap" valign="top" width="1%" align="right">
+											ISBN:&nbsp;
+										</td>
+										<td valign="top" width="100%" align="left">
+											<font class="results">9780810994935 (trade bdg.)</font>
+										</td>
+									</tr>
+								
+
+							
+						</tbody></table>								
+					
+					</td>
+				</tr>
+				
+                
+
+				
+				
+
+    		    <tr>
+	    		    <td colspan="3" width="100%" align="center"><img src="Jobs%20%28Primary%29_files/separator_bar.gif" alt="" border="0" height="1" width="100%"></td>
+	    	    </tr>
+	    	    
+			
+						</tbody></table>
+					</td>
+				</tr>
+			
+
+	</tbody></table>
+	
+	
+		</div></td><td class="RightPanel" style="width: 1%;" valign="top"></td>
+	</tr>
+</tbody></table>
+	
+
+	</form>
+	
+
+
+</body></html>
