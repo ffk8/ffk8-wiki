@@ -78,4 +78,45 @@ See what's available at the [School Library](http://destiny.dadeschools.net/comm
 
 Access online encyclopedia and much, much more at the miamidade [Virtual Library](http://virtuallibrary.dadeschools.net/). From home, you may need a log-in and password. See librarian for details.
 
+## N
+![](files/Clever-baby-reading-newspaper.jpg)
 
+[News](https://ffk8.github.io/ffk8-wiki/.htmlStudent%20News)
+
+## S
+
+![](files/mad-scientist1.jpg)
+
+[Science and Invention Fair](https://ffk8.github.io/ffk8-wiki/.htmlScience%20and%20Invention%20Fair)
+
+![](files/falling_star.jpg)
+
+[Starfall](http://www.starfall.com/)
+
+![](files/Council.jpg)
+
+**Student Council 2014-2015**
+
+[Student Council Members 2014-25.docx]()
+
+![](files/study%20jams.jpg)
+
+['Study Jams' - Math+Science](http://studyjams.scholastic.com/studyjams/index.htm)
+
+## T
+
+![](files/dog_typing.jpg)
+	
+[Free Typing Game](http://www.freetypinggame.net/Default.asp)
+
+[Learning Games for Kids](http://www.learninggamesforkids.com/)
+
+[Teach Yourself Typing](http://typingclub.com/typing-qwerty-en.html)
+
+There is also a Typing App on the Student Portal
+
+## W
+
+Wifi - how to log on.	
+Network: Dadeschools Guest 
+Password: BeOurGuest!! (B, O, & G have to be in caps)
