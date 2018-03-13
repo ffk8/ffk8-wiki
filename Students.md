@@ -6,19 +6,15 @@ Letter | Information
 A |
   | ![](/files/1.jpg) 
   | [Absense Note](https://drive.google.com/file/d/0B5yZ5igSb6QVRkt2c0wzYXlnRGc/view)
-  | 
   | ![](/files/arcademicskillbuilders.jpeg)
   | [Academic Skill Builders](http://www.arcademicskillbuilders.com/)
-  |
   | ![](/files/art.jpg)
   | [the Art Zone](http://www.nga.gov/kids/)
 B |  
   | ![](/files/book_report.jpg)
   | [Book Report Sandwhich Station](http://www.scholastic.com/kids/homework/sandwich.asp) 
-  |
   | ![](/files/bp.jpg)
   | [Brainpop](http://www.brainpop.com/) -  Ask your teacher / at the Media Center for log-in and password.
-  |
   | ![](/files/stop%20bullying.gif)
   | [Bullying](/Stop-Bullying.html)
 C |
@@ -27,7 +23,6 @@ C |
   | [Code of Stuident Conduct](http://destiny.dadeschools.net/cataloging/servlet/presentadvancedsearchredirectorform.do;jsessionid=544055D195B243CA1F1243CA787AACF9?l2m=Library%20Search&tm=Catalog) 
   | ![](/files/community_service.jpg)
   | [Community Service Log](https://drive.google.com/open?id=0B5yZ5igSb6QVWTBVVlNmNzA2ckk) - Community Service Opportunities - see menu to the left of this webpage
-  |
   | ![](/files/CREATEAGRAPH.jpg)
   | [Create a Graph](http://nces.ed.gov/nceskids/createagraph/)
 D |
