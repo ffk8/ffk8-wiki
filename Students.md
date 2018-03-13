@@ -117,6 +117,8 @@ There is also a Typing App on the Student Portal
 
 ## W
 
-Wifi - how to log on.	
+Wifi - how to log on.
+
 Network: Dadeschools Guest 
+
 Password: BeOurGuest!! (B, O, & G have to be in caps)
